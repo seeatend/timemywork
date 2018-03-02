@@ -1988,7 +1988,7 @@ License: You must have a valid license purchased only from themeforest(the above
           																		<%= user.job_rate %>
           																	</td>
           																	<td>
-          																		<%#= ((DateTime.now.to_time - user.created_at.to_time) / 1.day).floor %>
+          																		<%= ((DateTime.now.to_time - user.created_at.to_time) / 1.day).floor %>
           																	</td>
           																	<td class="m--align-right m--font-brand">
                                               <% if Order.where(member_id: user).exists? %>

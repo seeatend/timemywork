@@ -1159,7 +1159,7 @@ Like: www.facebook.com/monsoonmms
 																		<%= user.job_rate %>
 																	</td>
 																	<td>
-																		<%= ((DateTime.now.to_time - User.last.created_at.to_time) / 1.day).floor %>
+																		<%= ((DateTime.now.to_time - user.created_at.to_time) / 1.day).floor %>
 																	</td>
 																	<td class="m--align-right m--font-brand">
 																		$<%= Order.where(member_id: user).pluck(:amount).inject(0){|sum,x| sum + x } %>
