@@ -1342,7 +1342,7 @@ var Dashboard = function() {
                 source: {
                     read: {
                         //url: 'https://keenthemes.com/metronic/preview/inc/api/datatables/demos/default.php'
-                        url: 'http://localhost:3000/orders.json',
+                        url: 'https://desolate-fortress-98739.herokuapp.com/orders.json',
                         method: 'GET'
                     }
                 },
