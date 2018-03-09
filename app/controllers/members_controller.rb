@@ -24,7 +24,7 @@ class MembersController < ApplicationController
     @member = Member.new(member_params)
 
     if @member.save
-      Admin.create(email: @member.email, password: "11111111", user_type: "members")
+      Admin.create(email: @member.email, password: "11111111", user_type: "members", member_id: @member.id)
       redirect_to members_path, notice: 'Member was successfully created.'
     else
       render :new
