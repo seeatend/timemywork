@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :members
   devise_for :admins
   root 'welcome#dashboard'
-  devise_for :users  
+  #devise_for :users  
   resources :users
   resources :customers
   resources :orders

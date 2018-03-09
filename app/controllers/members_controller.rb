@@ -24,6 +24,7 @@ class MembersController < ApplicationController
     @member = Member.new(member_params)
 
     if @member.save
+      Admin.create(email: @member.email, password: "11111111", user_type: "members")
       redirect_to members_path, notice: 'Member was successfully created.'
     else
       render :new
@@ -53,6 +54,6 @@ class MembersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def member_params
-      params.require(:member).permit(:name, :email, :job_rate)
+      params.require(:member).permit(:name, :email, :job_rate, :time_rate, :day_rate, :night_rate, :time_cost, :day_cost, :night_cost, :fixed_rate)
     end
 end

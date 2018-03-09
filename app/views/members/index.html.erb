@@ -1651,6 +1651,9 @@ License: You must have a valid license purchased only from themeforest(the above
           																	<td class="m-widget11__total m--align-right">
           																		Total
           																	</td>
+                                           <td class="m-widget11__total m--align-right">
+                                              
+                                            </td>
           																</tr>
           															</thead>
           															<!--end::Thead-->
@@ -1682,6 +1685,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                               $0
                                               <% end %>
           																	</td>
+          																	
+                                            <td class="m--align-right m--font-brand">
+                                              <%= link_to "Edit", edit_member_path(user.id) %> 
+                                            </td>
           																</tr>
           																<% end %>
           															</tbody>

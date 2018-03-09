@@ -1645,11 +1645,19 @@ License: You must have a valid license purchased only from themeforest(the above
                                 											<label for="exampleSelect1">
                                 												Job Type
                                 											</label>
-                                                      <%= form.select :job_type, ['Fixed', 'Time Tracking'], {}, {class: "form-control m-input m-input--air m-input--pill"} %>
+                                                      <%= form.select :job_type, [['Time Tracking (时间)', 'Time Tracking'], ['Fixed (工)', 'Fixed'], ['Day (天)', 'Day'], ['O.N (夜)', 'O.N']], {}, {class: "form-control m-input m-input--air m-input--pill", id: "job_type"} %>
                                 											
                                 										</div>
+                                                    <div class="form-group m-form__group" id="business" style="display:none;">
+                                                    											<label for="exampleSelect1">
+                                                    												 Type
+                                                    											</label>
+                                                                          <%= form.select :fixed_type, [['Normal (普通)', 'Normal'], ['Hotel (酒店)', 'Hotel']], {}, {class: "form-control m-input m-input--air m-input--pill"} %>
+                                											
+                                                    										</div>
           											
           										</div>
+                              
           										<div class="m-portlet__foot m-portlet__foot--fit">
           											<div class="m-form__actions m-form__actions">
                                   <%= form.submit "Start", class: "btn btn-success btn-block" %>
@@ -2365,6 +2373,21 @@ License: You must have a valid license purchased only from themeforest(the above
     	<!--begin::Base Scripts -->
 		<script src="../assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
 		<script src="../assets/demo/demo10/base/scripts.bundle.js" type="text/javascript"></script>
+    
+    <script>
+      $(document).ready(function(){
+          $('#job_type').on('change', function() {
+            if ( this.value == 'Fixed')
+            {
+              $("#business").show();
+            }
+            else
+            {
+              $("#business").hide();
+            }
+          });
+      });
+      </script>
 		<!--end::Base Scripts -->
 	</body>
 	<!-- end::Body -->

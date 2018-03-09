@@ -26,16 +26,33 @@ class OrdersController < ApplicationController
   # POST /orders
   def create
     @order = Order.new(order_params)
-    @order.member_id = 1
+    member_id = 1
+    @order.member_id = member_id
     @order.user_id = 1
+    member = current_admin.member
     if params[:order][:job_type] == "Fixed"
-      @order.amount = 100
+      @order.amount = member.fixed_rate
+      if params[:order][:fixed_type] == "Hotel"
+        @order.cost = @order.amount * 0.2
+      else
+        @order.cost = @order.amount * 0.3
+      end
     end
+    
     if params[:order][:job_type] == "Time Tracking"
-      @order.amount = 30
+      @order.amount = member.time_rate
+      @order.cost = member.time_cost
+    end
+    if params[:order][:job_type] == "Day"
+      @order.amount = member.day_rate
+      @order.cost = member.day_cost
+    end
+    if params[:order][:job_type] == "O.N"
+      @order.amount = member.night_rate
+      @order.cost = member.night_cost
     end
     @order.starttime = DateTime.now
-    @order.cost = Member.first.job_rate
+
 
     if @order.save
       respond_to do |format|
@@ -91,7 +108,7 @@ class OrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      params.require(:order).permit(:reference, :status, :job_type)
+      params.require(:order).permit(:reference, :status, :job_type, :fixed_type)
     end
  
     def pending_order

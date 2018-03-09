@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180302085905) do
+ActiveRecord::Schema.define(version: 20180309083704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,10 @@ ActiveRecord::Schema.define(version: 20180302085905) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "user_type"
+    t.bigint "member_id"
     t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["member_id"], name: "index_admins_on_member_id"
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
@@ -50,6 +53,14 @@ ActiveRecord::Schema.define(version: 20180302085905) do
     t.integer "job_rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "time_rate"
+    t.integer "day_rate"
+    t.integer "night_rate"
+    t.integer "time_cost"
+    t.integer "day_cost"
+    t.integer "night_cost"
+    t.integer "fixed_rate"
+    t.integer "fixed_cost"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -64,6 +75,7 @@ ActiveRecord::Schema.define(version: 20180302085905) do
     t.bigint "member_id"
     t.string "job_type"
     t.integer "cost"
+    t.string "fixed_type"
     t.index ["member_id"], name: "index_orders_on_member_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -93,6 +105,7 @@ ActiveRecord::Schema.define(version: 20180302085905) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "admins", "members"
   add_foreign_key "orders", "members"
   add_foreign_key "orders", "users"
 end
