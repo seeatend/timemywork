@@ -27,7 +27,7 @@ class MembersController < ApplicationController
       Admin.create(email: @member.email, password: "11111111", user_type: "members", member_id: @member.id)
       redirect_to members_path, notice: 'Member was successfully created.'
     else
-      render :new
+      redirect_to new_user_path, notice: 'Form must be completed.'
     end
   end
 

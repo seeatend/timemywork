@@ -1371,13 +1371,10 @@ var Dashboard = function() {
             pagination: true,
 
             columns: [{
-                field: "reference",
+                field: "id",
                 title: "#",
                 sortable: false,
                 width: 40,
-                selector: {
-                    class: 'm-checkbox--solid m-checkbox--brand'
-                },
                 textAlign: 'center'
             }, {
                 field: "user_id",
@@ -1406,6 +1403,7 @@ var Dashboard = function() {
                 overflow: 'visible',
                 template: function(row) {
                     var dropup = (row.getDatatable().getPageSize() - row.getIndex()) <= 4 ? 'dropup' : '';
+                    var order_id = row.id
 
                     return '\
                         <div class="dropdown ' + dropup + '">\
@@ -1421,7 +1419,7 @@ var Dashboard = function() {
                         <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">\
                             <i class="la la-edit"></i>\
                         </a>\
-                        <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete">\
+                        <a href="/orders/' + order_id + '" data-method="delete" rel="nofollow" data-confirm="Are you sure?" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete">\
                             <i class="la la-trash"></i>\
                         </a>\
                     ';
