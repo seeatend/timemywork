@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   belongs_to :member
   after_update :save_sales
   after_create :save_costs
+  before_destroy :save_to_log
   
   def as_json(options={})
         super.as_json(options).merge({user_name: get_user_name}).merge({starttime: formatted_starttime, endtime: formatted_endtime })
@@ -33,4 +34,9 @@ class Order < ApplicationRecord
       Account.first.update(costs: Account.first.costs + self.cost)
     end
     
+    private
+    
+    def save_to_log
+      Log.create(orderid: self.id, user_name: self.member.name, starttime: self.starttime, endtime: self.endtime, amount: self.amount, job_type: self.job_type, cost: self.cost, fixed_type: self.fixed_type)
+    end
 end
