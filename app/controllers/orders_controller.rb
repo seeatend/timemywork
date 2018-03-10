@@ -26,9 +26,8 @@ class OrdersController < ApplicationController
   # POST /orders
   def create
     @order = Order.new(order_params)
-    member_id = 1
-    @order.member_id = member_id
     @order.user_id = 1
+    @order.member_id = current_admin.member_id
     member = current_admin.member
     if params[:order][:job_type] == "Fixed"
       @order.amount = member.fixed_rate
