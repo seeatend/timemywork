@@ -129,7 +129,7 @@ class OrdersController < ApplicationController
     end
  
     def pending_order
-      @orders = Order.all
+      @orders = current_admin.member.orders
       if @orders.exists?
         if @orders.last.status == nil
           redirect_to edit_order_path(@orders.last)
