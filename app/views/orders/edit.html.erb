@@ -145,7 +145,7 @@
                                                     											<label for="exampleSelect1">
                                                     												Status
                                                     											</label>
-                                                                          <%= form.select :status, ['Cash', 'Credit'], {}, {class: "form-control m-input m-input--air m-input--pill", id: "payment-type"} %>
+                                                                          <%= form.select :status, [['Cash (现金)', 'Cash'], ['Credit (挂单)', 'Credit']], {}, {class: "form-control m-input m-input--air m-input--pill", id: "payment-type"} %>
                                 											
                                                     										</div>
                                                                         <div class="form-group m-form__group" id="business" style="display:none;">

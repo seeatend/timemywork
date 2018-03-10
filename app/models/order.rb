@@ -16,12 +16,12 @@ class Order < ApplicationRecord
     
     def formatted_starttime
       unless self.starttime == nil
-        self.starttime.strftime('%a %b %d %H:%M:%S %Z %Y')
+        self.starttime.in_time_zone("Hong Kong").strftime('%a %b %d %H:%M:%S %Z %Y')
       end
     end
     def formatted_endtime
       unless self.endtime == nil
-        self.endtime.strftime('%a %b %d %H:%M:%S %Z %Y')
+        self.endtime.in_time_zone("Hong Kong").strftime('%a %b %d %H:%M:%S %Z %Y')
       end
     end
     
