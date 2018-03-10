@@ -1,0 +1,3 @@
+class Credit < ApplicationRecord
+
+end

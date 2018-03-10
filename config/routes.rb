@@ -8,5 +8,9 @@ Rails.application.routes.draw do
   resources :customers
   resources :orders
   resources :products
+  resources :creditors
+  put '/creditors/:id/paid' => 'creditors#paid_credits', :as => 'paid_credits'
+
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

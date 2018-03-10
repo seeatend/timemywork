@@ -75,8 +75,11 @@ class OrdersController < ApplicationController
     if @order.endtime == nil
       @order.endtime = DateTime.now
     end
-    if @order.status == "Time Tracking"
+    if @order.job_type == "Time Tracking"
       @order.amount = @order.amount * ((@order.starttime.to_time - @order.endtime.to_time ) / 1.hours).ceil
+    end
+    if params[:order][:status] == "Credit"
+      Credit.create(amount: @order.amount, name: params[:order][:creditor_name], status: "Unpaid")
     end
     if @order.update(order_params)
       respond_to do |format|
@@ -123,7 +126,7 @@ class OrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      params.require(:order).permit(:reference, :status, :job_type, :fixed_type)
+      params.require(:order).permit(:reference, :status, :job_type, :fixed_type, :creditor_name)
     end
  
     def pending_order
