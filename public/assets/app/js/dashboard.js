@@ -1342,7 +1342,8 @@ var Dashboard = function() {
                 source: {
                     read: {
                         //url: 'https://keenthemes.com/metronic/preview/inc/api/datatables/demos/default.php'
-                        url: 'https://desolate-fortress-98739.herokuapp.com/orders.json',
+                        //url: 'https://desolate-fortress-98739.herokuapp.com/orders.json',
+                        url: 'http://localhost:3000/orders.json',
                         method: 'GET'
                     }
                 },
@@ -1373,7 +1374,7 @@ var Dashboard = function() {
             columns: [{
                 field: "id",
                 title: "#",
-                sortable: false,
+                sortable: 'desc',
                 width: 40,
                 textAlign: 'center'
             }, {
@@ -1381,17 +1382,27 @@ var Dashboard = function() {
                 title: "User",
                 sortable: 'asc',
                 filterable: false,
-                width: 150,
+                width: 50,
                 template: '{{user_name}}'
+            }, {
+                field: "actual_type",
+                title: "Job Type",
+                width: 150
             }, {
                 field: "starttime",
                 title: "Start Time",
             }, {
                 field: "endtime",
+                sortable: 'desc',
                 title: "End Time"
             }, {
                 field: "amount",
-                title: "Amount"
+                title: "Amount",
+                width: 80
+            }, {
+                field: "cost",
+                title: "Cost",
+                width: 50
             }, {
                 field: "status",
                 title: "Status"

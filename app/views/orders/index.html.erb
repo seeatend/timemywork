@@ -4,13 +4,14 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>
-			TimeMyWork | Member
+			TimeMyWork | All Orders
 		</title>
 		<meta name="description" content="Blank inner page examples">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!--begin::Web font -->
 		<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ujs/1.2.2/rails.js"></script>
 		<script>
           WebFont.load({
             google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700","Asap+Condensed:500"]},
@@ -40,7 +41,7 @@
 							<div class="m-stack__item m-brand m-stack__item--left">
 								<div class="m-stack m-stack--ver m-stack--general m-stack--inline">
 									<div class="m-stack__item m-stack__item--middle m-brand__logo">
-										<a href="index.html" class="m-brand__logo-wrapper">
+										<a href="/" class="m-brand__logo-wrapper">
 											<img alt="" src="../assets/demo/demo10/media/img/logo/logo2.png" class="m-brand__logo-desktop"/>
 											<img alt="" src="../assets/demo/demo10/media/img/logo/logo_mini.png" class="m-brand__logo-mobile"/>
 										</a>
@@ -50,6 +51,7 @@
 							</div>
 							<!-- end::Brand -->		
 				<!-- begin::Topbar -->
+							
 							<!-- end::Topbar -->
 						</div>
 					</div>
@@ -65,7 +67,7 @@
 								<div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-dark m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-light m-aside-header-menu-mobile--submenu-skin-light "  >
 									<ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
 										<li class="m-menu__item  m-menu__item--active  m-menu__item--active-tab  m-menu__item--submenu m-menu__item--tabs"  data-menu-submenu-toggle="tab" aria-haspopup="true">
-											<a  href="/" class="m-menu__link m-menu__toggle">
+											<a  href="/" class="m-menu__link">
 												<span class="m-menu__link-text">
 													Dashboard
 												</span>
@@ -89,7 +91,7 @@
 															<ul class="m-menu__subnav">
 															
 																<li class="m-menu__item "  data-redirect="true" aria-haspopup="true">
-																	<a  href="../../users/new" class="m-menu__link ">
+																	<a  href="../users/new" class="m-menu__link ">
 																		<i class="m-menu__link-icon flaticon-users"></i>
 																		<span class="m-menu__link-text">
 																			Register Member
@@ -97,7 +99,7 @@
 																	</a>
 																</li>
 																<li class="m-menu__item "  data-redirect="true" aria-haspopup="true">
-																	<a  href="../../members" class="m-menu__link ">
+																	<a  href="../members" class="m-menu__link ">
 																		<i class="m-menu__link-icon flaticon-users"></i>
 																		<span class="m-menu__link-text">
 																			All Members
@@ -109,7 +111,7 @@
 													</li>
 													<li class="m-menu__item  m-menu__item--actions"  aria-haspopup="true">
 														<div class="m-menu__link m-menu__link--toggle-skip">
-															<a href="../../orders/new" class="btn btn-accent m-btn m-btn--icon m-btn--pill">
+															<a href="/orders/new" class="btn btn-accent m-btn m-btn--icon m-btn--pill">
 																<span>
 																	<i class="la la-plus"></i>
 																	<span>
@@ -133,14 +135,14 @@
 			<!-- end::Header -->		
 		<!-- begin::Body -->
 			<div class="m-grid__item m-grid__item--fluid  m-grid m-grid--ver-desktop m-grid--desktop m-page__container m-body">
-
+			
 				<div class="m-grid__item m-grid__item--fluid m-wrapper">
 					<!-- BEGIN: Subheader -->
 					<div class="m-subheader ">
 						<div class="d-flex align-items-center">
 							<div class="mr-auto">
 								<h3 class="m-subheader__title m-subheader__title--separator">
-									Create Users
+									All Orders
 								</h3>
 								<ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
 									<li class="m-nav__item m-nav__item--home">
@@ -152,7 +154,7 @@
 										-
 									</li>
 									<li class="m-nav__item">
-										<a href="" class="m-nav__link">
+										<a href="/" class="m-nav__link">
 											<span class="m-nav__link-text">
 												Dashboard
 											</span>
@@ -164,7 +166,7 @@
 									<li class="m-nav__item">
 										<a href="" class="m-nav__link">
 											<span class="m-nav__link-text">
-												Register Users
+												Orders
 											</span>
 										</a>
 									</li>
@@ -179,187 +181,271 @@
 					<!-- END: Subheader -->
           <div class="m-content">
           						<div class="row">
-          							<div class="col-lg-12">
-          								<!--begin::Portlet-->
-          								<div class="m-portlet">
+          							<div class="col-xl-12">
+          								<!--begin:: Widgets/Application Sales-->
+          								<div class="m-portlet m-portlet--full-height  m-portlet--rounded">
           									<div class="m-portlet__head">
           										<div class="m-portlet__head-caption">
           											<div class="m-portlet__head-title">
-          												<span class="m-portlet__head-icon m--hide">
-          													<i class="la la-gear"></i>
-          												</span>
           												<h3 class="m-portlet__head-text">
-          													User Form
+          													All Orders
           												</h3>
           											</div>
           										</div>
           									</div>
-          									
-          									<%= form_for(@member, html: {class: "m-form"}) do |form| %>
-          										<div class="m-portlet__body">
-          											<div class="m-form__section m-form__section--first">
-          												<div class="form-group m-form__group">
-          													<label for="example_input_full_name">
-          														User Nick Name:
-          													</label>
-                                    <%= form.text_field :name, id: :member_name, class: "form-control m-input", placeholder: "Enter full name" %>
-          													<span class="m-form__help">
-          														Please enter user's nick name
-          													</span>
-          												</div>
-          												<div class="form-group m-form__group">
-          													<label>
-          														Email address:
-          													</label>
-                                    <%= form.text_field :email, id: :member_email, class: "form-control m-input", placeholder: "Enter email" %>
-          													
-          													<span class="m-form__help">
-          														We'll never share your email with anyone else
-          													</span>
-          												</div>
-          												<div class="form-group m-form__group">
-          													<label>
-          														Fixed rate
-          													</label>
-          													<div class="input-group">
-          														<div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-          														</div>
-                                      <%= form.number_field :fixed_rate, id: :member_job_rate, class: "form-control m-input"  %>
-          														
+          									<div class="m-portlet__body">
+          										<div class="tab-content">
+          											<div class="tab-pane active" id="m_widget11_tab1_content">
+          												<!--begin::Widget 11-->
+          												<div class="m-widget11">
+          													<div class="table-responsive">
+          														<!--begin::Table-->
+          														<table class="table">
+          															<!--begin::Thead-->
+          															<thead>
+          																<tr>
+          																	<td>
+          																		#ID
+          																	</td>
+          																	<td>
+          																		Member Name
+          																	</td>
+          																	<td>
+          																		Job Type
+          																	</td>
+          																	<td>
+          																		Start Time
+          																	</td>
+          																	<td>
+          																		End Time
+          																	</td>
+          																	<td>
+          																		Amount
+          																	</td>
+          																	<td>
+          																		Cost
+          																	</td>
+          																	<td>
+          																		Status
+          																	</td>
+                                           <td class="m-widget11__total m--align-right">
+                                              
+                                            </td>
+          																</tr>
+          															</thead>
+          															<!--end::Thead-->
+          							<!--begin::Tbody-->
+          															<tbody>
+          																<tr>
+                                            <% @orders.each do |order| %>
+          																	<td>
+																		          <%= order.id %>
+          																	</td>
+          																	<td>
+          																			<%= order.get_user_name %>
+          																	</td>
+          																	<td>
+          																		<%= order.get_actual_type %>
+          																	</td>
+          																	<td>
+          																		<%= order.formatted_starttime %>
+          																	</td>
+          																	<td>
+          																		<%= order.formatted_endtime %>
+          																	</td>
+          																	<td>
+          																		<%= order.amount %>
+          																	</td>
+          																	<td>
+          																		<%= order.cost %>
+          																	</td>
+          																	<td>
+          																		<%= order.status %>
+          																	</td>
+                                            <td class="m--align-right m--font-brand">
+                                              <%= link_to "Edit", admin_edit_path(order.id) %> 
+                                            </td>
+          																</tr>
+          																<% end %>
+          															</tbody>
+          															<!--end::Tbody-->
+          														</table>
+          														<!--end::Table-->
           													</div>
-          												</div>
-          												<div class="form-group m-form__group">
-          													<label>
-          														Time rate (per hour)
-          													</label>
-          													<div class="input-group">
-          														<div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-          														</div>
-                                      <%= form.number_field :time_rate, id: :member_job_rate, class: "form-control m-input"  %>
-          														
-          													</div>
-          												</div>
-          												<div class="form-group m-form__group">
-          													<label>
-          														Day rate
-          													</label>
-          													<div class="input-group">
-          														<div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-          														</div>
-                                      <%= form.number_field :day_rate, id: :member_job_rate, class: "form-control m-input"  %>
-          														
-          													</div>
-          												</div>
-          												<div class="form-group m-form__group">
-          													<label>
-          														Night rate
-          													</label>
-          													<div class="input-group">
-          														<div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-          														</div>
-                                      <%= form.number_field :night_rate, id: :member_job_rate, class: "form-control m-input"  %>
-          														
-          													</div>
-          												</div>
           												
-          												<div class="form-group m-form__group">
-          													<label>
-          														Hotel Fixed cost
-          													</label>
-          													<div class="input-group">
-          														<div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-          														</div>
-                                      <%= form.number_field :hotel_fixed_cost, id: :member_job_rate, class: "form-control m-input"  %>
-          														
-          													</div>
           												</div>
-          												<div class="form-group m-form__group">
-          													<label>
-          														Normal Fixed cost
-          													</label>
-          													<div class="input-group">
-          														<div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-          														</div>
-                                      <%= form.number_field :normal_fixed_cost, id: :member_job_rate, class: "form-control m-input"  %>
-          														
+          												<!--end::Widget 11-->
+          											</div>
+          											<div class="tab-pane" id="m_widget11_tab2_content">
+          												<!--begin::Widget 11-->
+          												<div class="m-widget11">
+          													<div class="table-responsive">
+          														<!--begin::Table-->
+          														<table class="table">
+          															<!--begin::Thead-->
+          															<thead>
+          																<tr>
+          																	<td class="m-widget11__label">
+          																		#
+          																	</td>
+          																	<td class="m-widget11__app">
+          																		Application
+          																	</td>
+          																	<td class="m-widget11__sales">
+          																		Sales
+          																	</td>
+          																	<td class="m-widget11__change">
+          																		Change
+          																	</td>
+          																	<td class="m-widget11__price">
+          																		Avg Price
+          																	</td>
+          																	<td class="m-widget11__total m--align-right">
+          																		Total
+          																	</td>
+          																</tr>
+          															</thead>
+          															<!--end::Thead-->
+          							<!--begin::Tbody-->
+          															<tbody>
+          																<tr>
+          																	<td>
+          																		<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
+          																			<input type="checkbox">
+          																			<span></span>
+          																		</label>
+          																	</td>
+          																	<td>
+          																		<span class="m-widget11__title">
+          																			Loop
+          																		</span>
+          																		<span class="m-widget11__sub">
+          																			CRM System
+          																		</span>
+          																	</td>
+          																	<td>
+          																		19,200
+          																	</td>
+          																	<td>
+          																		<div class="m-widget11__chart" style="height:50px; width: 100px">
+          																			<iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+          																			<canvas id="m_chart_sales_by_apps_2_1" style="display: block; width: 0px; height: 0px;" height="0" width="0"></canvas>
+          																		</div>
+          																	</td>
+          																	<td>
+          																		$63
+          																	</td>
+          																	<td class="m--align-right m--font-brand">
+          																		$34,740
+          																	</td>
+          																</tr>
+          																<tr>
+          																	<td>
+          																		<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
+          																			<input type="checkbox">
+          																			<span></span>
+          																		</label>
+          																	</td>
+          																	<td>
+          																		<span class="m-widget11__title">
+          																			Selto
+          																		</span>
+          																		<span class="m-widget11__sub">
+          																			Powerful Website Builder
+          																		</span>
+          																	</td>
+          																	<td>
+          																		24,310
+          																	</td>
+          																	<td>
+          																		<div class="m-widget11__chart" style="height:50px; width: 100px">
+          																			<iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+          																			<canvas id="m_chart_sales_by_apps_2_2" style="display: block; width: 0px; height: 0px;" height="0" width="0"></canvas>
+          																		</div>
+          																	</td>
+          																	<td>
+          																		$39
+          																	</td>
+          																	<td class="m--align-right m--font-brand">
+          																		$46,010
+          																	</td>
+          																</tr>
+          																<tr>
+          																	<td>
+          																		<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
+          																			<input type="checkbox">
+          																			<span></span>
+          																		</label>
+          																	</td>
+          																	<td>
+          																		<span class="m-widget11__title">
+          																			Jippo
+          																		</span>
+          																		<span class="m-widget11__sub">
+          																			The Best Selling App
+          																		</span>
+          																	</td>
+          																	<td>
+          																		9,076
+          																	</td>
+          																	<td>
+          																		<div class="m-widget11__chart" style="height:50px; width: 100px">
+          																			<iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+          																			<canvas id="m_chart_sales_by_apps_2_3" style="display: block; width: 0px; height: 0px;" height="0" width="0"></canvas>
+          																		</div>
+          																	</td>
+          																	<td>
+          																		$105
+          																	</td>
+          																	<td class="m--align-right m--font-brand">
+          																		$67,800
+          																	</td>
+          																</tr>
+          																<tr>
+          																	<td>
+          																		<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
+          																			<input type="checkbox">
+          																			<span></span>
+          																		</label>
+          																	</td>
+          																	<td>
+          																		<span class="m-widget11__title">
+          																			Verto
+          																		</span>
+          																		<span class="m-widget11__sub">
+          																			Web Development Tool
+          																		</span>
+          																	</td>
+          																	<td>
+          																		11,094
+          																	</td>
+          																	<td>
+          																		<div class="m-widget11__chart" style="height:50px; width: 100px">
+          																			<iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+          																			<canvas id="m_chart_sales_by_apps_2_4" style="display: block; width: 0px; height: 0px;" height="0" width="0"></canvas>
+          																		</div>
+          																	</td>
+          																	<td>
+          																		$16
+          																	</td>
+          																	<td class="m--align-right m--font-brand">
+          																		$18,520
+          																	</td>
+          																</tr>
+          															</tbody>
+          															<!--end::Tbody-->
+          														</table>
+          														<!--end::Table-->
           													</div>
+          													
           												</div>
-                                  
-          												<div class="form-group m-form__group">
-          													<label>
-          														Time Cost (per hour)
-          													</label>
-          													<div class="input-group">
-          														<div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-          														</div>
-                                      <%= form.number_field :time_cost, id: :member_job_rate, class: "form-control m-input"  %>
-          														
-          													</div>
-          												</div>
-          												<div class="form-group m-form__group">
-          													<label>
-          														Day Cost
-          													</label>
-          													<div class="input-group">
-          														<div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-          														</div>
-                                      <%= form.number_field :day_cost, id: :member_job_rate, class: "form-control m-input"  %>
-          														
-          													</div>
-          												</div>
-          												<div class="form-group m-form__group">
-          													<label>
-          														Night Cost
-          													</label>
-          													<div class="input-group">
-          														<div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-          														</div>
-                                      <%= form.number_field :night_cost, id: :member_job_rate, class: "form-control m-input"  %>
-          														
-          													</div>
-          												</div>
+          												<!--end::Widget 11-->
           											</div>
           										</div>
-          										<div class="m-portlet__foot m-portlet__foot--fit">
-          											<div class="m-form__actions m-form__actions">
-                                  <%= form.submit "Update", class: "btn btn-primary" %>
-          												<%= link_to "Cancel", :back, class: "btn btn-secondary" %>
-          											</div>
-          										</div>
-          									<% end %>
-          									<!--end::Form-->
+          									</div>
           								</div>
-          								<!--end::Portlet-->
-          	
+          								<!--end:: Widgets/Application Sales-->
           							</div>
-          							
           						</div>
           					</div>
 				</div>
@@ -375,7 +461,6 @@
 									2018 &copy; TimeMyWork
 								</span>
 							</div>
-							
 						</div>
 					</div>
 				</div>

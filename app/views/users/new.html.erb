@@ -274,6 +274,35 @@
           														
           													</div>
           												</div>
+                                  
+          												<div class="form-group m-form__group">
+          													<label>
+          														Hotel Fixed cost
+          													</label>
+          													<div class="input-group">
+          														<div class="input-group-prepend">
+          															<span class="input-group-text" id="basic-addon2">
+          																$
+          															</span>
+          														</div>
+                                      <%= form.number_field :hotel_fixed_cost, id: :member_job_rate, class: "form-control m-input"  %>
+          														
+          													</div>
+          												</div>
+          												<div class="form-group m-form__group">
+          													<label>
+          														Normal Fixed cost
+          													</label>
+          													<div class="input-group">
+          														<div class="input-group-prepend">
+          															<span class="input-group-text" id="basic-addon2">
+          																$
+          															</span>
+          														</div>
+                                      <%= form.number_field :normal_fixed_cost, id: :member_job_rate, class: "form-control m-input"  %>
+          														
+          													</div>
+          												</div>
           												
           												<div class="form-group m-form__group">
           													<label>
@@ -322,9 +351,7 @@
           										<div class="m-portlet__foot m-portlet__foot--fit">
           											<div class="m-form__actions m-form__actions">
                                   <%= form.submit "Create", class: "btn btn-primary" %>
-          												<button type="reset" class="btn btn-secondary">
-          													Cancel
-          												</button>
+                                  <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
           											</div>
           										</div>
           									<% end %>

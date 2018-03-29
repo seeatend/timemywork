@@ -34,6 +34,9 @@ class MembersController < ApplicationController
   # PATCH/PUT /members/1
   def update
     if @member.update(member_params)
+      unless @member.password.nil?
+        Admin.where(email: @member.email).first.update(password: @member.password)
+      end
       redirect_to @member, notice: 'Member was successfully updated.'
     else
       render :edit
@@ -54,6 +57,6 @@ class MembersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def member_params
-      params.require(:member).permit(:name, :email, :job_rate, :time_rate, :day_rate, :night_rate, :time_cost, :day_cost, :night_cost, :fixed_rate)
+      params.require(:member).permit(:name, :email, :job_rate, :time_rate, :day_rate, :night_rate, :time_cost, :day_cost, :night_cost, :fixed_rate, :hotel_fixed_cost, :normal_fixed_cost, :password)
     end
 end

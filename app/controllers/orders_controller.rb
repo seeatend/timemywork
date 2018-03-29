@@ -4,9 +4,13 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    @orders = Order.all
+    @orders = Order.all.order(endtime: :desc)
+    
+    respond_to do |format|
 
-    render json: @orders
+      format.html
+      format.json { render json: @orders }
+    end
   end
 
   # GET /orders/1
@@ -22,6 +26,10 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
   end
+  
+  def admin_edit
+    @order = Order.find(params[:id])
+  end
 
   # POST /orders
   def create
@@ -32,9 +40,9 @@ class OrdersController < ApplicationController
     if params[:order][:job_type] == "Fixed"
       @order.amount = member.fixed_rate
       if params[:order][:fixed_type] == "Hotel"
-        @order.cost = @order.amount * 0.2
+        @order.cost = member.hotel_fixed_cost
       else
-        @order.cost = @order.amount * 0.3
+        @order.cost = member.normal_fixed_cost
       end
     end
     
@@ -74,17 +82,39 @@ class OrdersController < ApplicationController
     if @order.endtime == nil
       @order.endtime = DateTime.now
     end
-    if @order.job_type == "Time Tracking"
-      @order.amount = @order.amount * ((@order.starttime.to_time - @order.endtime.to_time ) / 1.hours).ceil
+    
+    unless params[:order][:amount].present?
+      if @order.job_type == "Time Tracking"
+        @order.amount = @order.amount * ((@order.endtime.to_time - @order.starttime.to_time) / 1.hours).round(0.1)
+        @order.cost = @order.cost * ((@order.endtime.to_time - @order.starttime.to_time) / 1.hours).round(0.1)
+      end
+      if params[:order][:status] == "Credit"
+        Credit.create(amount: @order.amount, name: params[:order][:creditor_name], status: "Unpaid")
+      end
+    else
+      @amount = @order.amount
+      @cost = @order.cost
     end
-    if params[:order][:status] == "Credit"
-      Credit.create(amount: @order.amount, name: params[:order][:creditor_name], status: "Unpaid")
-    end
+      
     if @order.update(order_params)
-      respond_to do |format|
-
-        format.html {redirect_to new_order_path}# show.html.erb
-        format.json { render json: @order }
+      
+      if params[:order][:amount].present?
+        puts "EXIST"
+        sales = Account.first.sales - @amount + @order.amount
+        costs = Account.first.costs - @cost + @order.cost
+        Account.first.update(sales: sales, costs: costs)
+        respond_to do |format|
+          format.html {redirect_to admin_edit_path(@order)}# show.html.erb
+          format.json { render json: @order }
+        end
+      else
+        puts "NOT EXIST"
+        Account.first.update(sales: Account.first.sales + @order.amount)
+        Account.first.update(costs: Account.first.costs + @order.cost)
+        respond_to do |format|
+          format.html {redirect_to new_order_path}# show.html.erb
+          format.json { render json: @order }
+        end
       end
       
     else
@@ -102,6 +132,12 @@ class OrdersController < ApplicationController
     @order.destroy
     
     if @order.destroy
+      unless @order.amount == nil
+        Account.first.update(sales: Account.first.sales - @order.amount)
+      end
+      unless @order.cost == nil
+        Account.first.update(costs: Account.first.costs - @order.cost)
+      end
       respond_to do |format|
 
         format.html {redirect_to root_path}# show.html.erb
@@ -125,7 +161,7 @@ class OrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      params.require(:order).permit(:reference, :status, :job_type, :fixed_type, :creditor_name)
+      params.require(:order).permit(:reference, :status, :job_type, :fixed_type, :creditor_name, :amount, :cost)
     end
  
     def pending_order
