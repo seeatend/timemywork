@@ -21,7 +21,7 @@ class WelcomeController < ApplicationController
 
     request = Net::HTTP::Post.new(uri.path,
                                   'Content-Type'  => 'application/json;charset=utf-8',
-                                  'Authorization' => "Basic NGEwMGZmMjItY2NkNy0xMWUzLTk5ZDUtMDAwYzI5NDBlNjJj")
+                                  'Authorization' => "Basic MjE4MWRlNWMtODJmMi00NWQ0LTk2OTctNjg3ZmU0N2I5ZTAw")
     request.body = params.as_json.to_json
     response = http.request(request) 
     puts response.body
