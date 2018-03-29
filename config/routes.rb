@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   put '/creditors/:id/paid' => 'creditors#paid_credits', :as => 'paid_credits'
 
   get '/orders/admin-edit/:id' => 'orders#admin_edit', :as => 'admin_edit'
+  get '/notify' => 'welcome#notify', :as => 'notify'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
