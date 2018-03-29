@@ -10,7 +10,9 @@ class WelcomeController < ApplicationController
   end
   
   def notify
-    params = {"app_id" => "5eb5a37e-b458-11e3-ac11-000c2940e62c", 
+    require 'net/http'
+    
+    params = {"app_id" => "e890308e-4333-4497-b7b6-59ae47145896", 
               "contents" => {"en" => "English Message"},
               "included_segments" => ["All"]}
     uri = URI.parse('https://onesignal.com/api/v1/notifications')
