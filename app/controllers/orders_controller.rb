@@ -124,6 +124,21 @@ class OrdersController < ApplicationController
         end
       else
         puts "NOT EXIST"
+        require 'net/http'
+        message = @order.get_user_name + " has ended a job!"
+        params = {"app_id" => "e890308e-4333-4497-b7b6-59ae47145896", 
+                  "contents" => {"en" => message},
+                  "included_segments" => ["All"]}
+        uri = URI.parse('https://onesignal.com/api/v1/notifications')
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true
+
+        request = Net::HTTP::Post.new(uri.path,
+                                      'Content-Type'  => 'application/json;charset=utf-8',
+                                      'Authorization' => "Basic MjE4MWRlNWMtODJmMi00NWQ0LTk2OTctNjg3ZmU0N2I5ZTAw")
+        request.body = params.as_json.to_json
+        http.request(request)
+        
         Account.first.update(sales: Account.first.sales + @order.amount)
         Account.first.update(costs: Account.first.costs + @order.cost)
         respond_to do |format|
