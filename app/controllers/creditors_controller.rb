@@ -4,7 +4,7 @@ class CreditorsController < ApplicationController
   # GET /members
   def index
     @creditors = Credit.all
-    @total_credits = @creditors.sum(:amount)
+    @total_credits = @creditors.where(status: "Unpaid").sum(:amount)
   end
 
   # GET /members/1

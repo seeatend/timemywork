@@ -103,9 +103,6 @@ class OrdersController < ApplicationController
         @order.amount = @order.amount * ((@order.endtime.to_time - @order.starttime.to_time) / 1.hours).round(0.1)
         @order.cost = @order.cost * ((@order.endtime.to_time - @order.starttime.to_time) / 1.hours).round(0.1)
       end
-      if params[:order][:status] == "Credit"
-        Credit.create(amount: @order.amount, name: params[:order][:creditor_name], status: "Unpaid")
-      end
     else
       @amount = @order.amount
       @cost = @order.cost
@@ -115,6 +112,9 @@ class OrdersController < ApplicationController
       
       if params[:order][:amount].present?
         puts "EXIST"
+        if @order.status == "Credit"
+          @order.credit.update(amount: @order.amount)
+        end
         sales = Account.first.sales - @amount + @order.amount
         costs = Account.first.costs - @cost + @order.cost
         Account.first.update(sales: sales, costs: costs)
@@ -139,8 +139,13 @@ class OrdersController < ApplicationController
         request.body = params.as_json.to_json
         http.request(request)
         
-        Account.first.update(sales: Account.first.sales + @order.amount)
-        Account.first.update(costs: Account.first.costs + @order.cost)
+        if @order.status == "Credit"
+          credit = @order.build_credit(name: @order.creditor_name, amount: @order.amount, status: "Unpaid")
+          credit.save
+        end
+          Account.first.update(sales: Account.first.sales + @order.amount)
+          Account.first.update(costs: Account.first.costs + @order.cost)
+        
         respond_to do |format|
           format.html {redirect_to new_order_path}# show.html.erb
           format.json { render json: @order }

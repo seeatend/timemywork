@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180326145638) do
+ActiveRecord::Schema.define(version: 20180401032027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 20180326145638) do
     t.integer "amount"
     t.string "status"
     t.string "description"
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_credits_on_order_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -128,6 +130,7 @@ ActiveRecord::Schema.define(version: 20180326145638) do
   end
 
   add_foreign_key "admins", "members"
+  add_foreign_key "credits", "orders"
   add_foreign_key "orders", "members"
   add_foreign_key "orders", "users"
 end

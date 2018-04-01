@@ -233,16 +233,22 @@
           															<!--begin::Thead-->
           															<thead>
           																<tr>
-          																	<td class="m-widget11__label">
-          																		#ID
+          																	<td>
+          																		Order #
           																	</td>
-          																	<td class="m-widget11__app">
-          																		Name
+          																	<td>
+          																		User Name
           																	</td>
-          																	<td class="m-widget11__change">
+          																	<td>
+          																		Customer Name
+          																	</td>
+          																	<td>
+          																		Job Type
+          																	</td>
+          																	<td>
           																		Amount
           																	</td>
-          																	<td class="m-widget11__change">
+          																	<td>
           																		Status
           																	</td>
           																	
@@ -257,12 +263,20 @@
           																<tr>
                                             <% @creditors.each do |user| %>
           																	<td>
-																		
+                                              <%= link_to admin_edit_path(user.order_id) do %>
+																		            <%= user.order_id %>
+                                              <% end %>
           																	</td>
+          																	<td>
+                                              <%= user.order.get_user_name %>
+                                            </td>
           																	<td>
           																		<span class="m-widget11__title">
           																			<%= user.name %>
           																		</span>
+          																	</td>
+          																	<td>
+          																		<%= user.order.get_actual_type %>
           																	</td>
           																	<td>
           																		<%= user.amount %>
