@@ -35,7 +35,7 @@ class MembersController < ApplicationController
   def update
     if @member.update(member_params)
       unless @member.password.nil?
-        Admin.where(email: @member.email).first.update(password: @member.password)
+        @member.admin.update(password: @member.password)
       end
       redirect_to @member, notice: 'Member was successfully updated.'
     else

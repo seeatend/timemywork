@@ -35,6 +35,7 @@ class CreditorsController < ApplicationController
   # PATCH/PUT /members/1
   def update
     if @creditors.update(status: "Paid")
+      @creditors.order.update(status: "Paid")
       redirect_to creditors_path, notice: 'Member was successfully updated.'
     else
       redirect_to creditors_path, notice: 'Failed'

@@ -5,7 +5,7 @@ class Order < ApplicationRecord
   #after_create :save_costs
   before_destroy :save_to_log
   #before_destroy :reverse_account
-  has_one :credit
+  has_one :credit, dependent: :destroy
   
   def as_json(options={})
         super.as_json(options).merge({user_name: get_user_name}).merge({starttime: formatted_starttime, endtime: formatted_endtime }.merge({actual_type: get_actual_type}))
