@@ -171,9 +171,9 @@
           										<div class="m-portlet__foot m-portlet__foot--fit">
           											<div class="m-form__actions m-form__actions">
                                   <% if @order.endtime == nil %>
-                                    <%= form.submit "End", class: "btn btn-danger btn-block" %>
+                                    <%= form.submit "End", class: "btn btn-danger btn-block", data: { disable_with: "Ending..." } %>
                                     <% else %>
-                                  <%= form.submit "Start", class: "btn btn-success btn-block" %>
+                                  <%= form.submit "Start", class: "btn btn-success btn-block", data: { disable_with: "Starting..." } %>
                                   <% end %>
           											</div>
           										</div>

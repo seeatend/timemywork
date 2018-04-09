@@ -100,6 +100,7 @@ class OrdersController < ApplicationController
     
     unless params[:order][:amount].present?
       if @order.job_type == "Time Tracking"
+        
         @order.amount = @order.amount * ((@order.endtime.to_time - @order.starttime.to_time) / 1.hours).round(0.1)
         @order.cost = @order.cost * ((@order.endtime.to_time - @order.starttime.to_time) / 1.hours).round(0.1)
       end
