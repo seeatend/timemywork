@@ -82,6 +82,8 @@ test:
 #
 production:
   <<: *default
-  database: mms-timemywork_production
-  username: mms-timemywork
-  password: <%= ENV['MMS-TIMEMYWORK_DATABASE_PASSWORD'] %>
+
+  url: <%= ENV['DATABASE_URL'] %>
+#  database: mms-timemywork_production
+#  username: mms-timemywork
+#  password: <%= ENV['MMS-TIMEMYWORK_DATABASE_PASSWORD'] %>
