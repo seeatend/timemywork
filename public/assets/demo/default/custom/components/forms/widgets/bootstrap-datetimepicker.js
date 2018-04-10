@@ -22,13 +22,15 @@ var BootstrapDatetimepicker = function () {
             todayHighlight: true,
             autoclose: true,
             pickerPosition: 'bottom-left',
-            format: 'yyyy/mm/dd hh:ii'
+            format: 'yyyy/mm/dd hh:ii',
+            todayBtn: true
         });
         $('#m_datetimepicker_2_modal').datetimepicker({
             todayHighlight: true,
             autoclose: true,
             pickerPosition: 'bottom-left',
-            format: 'yyyy/mm/dd hh:ii'
+            format: 'yyyy/mm/dd hh:ii',
+            todayBtn: true
         });
 
         // today button

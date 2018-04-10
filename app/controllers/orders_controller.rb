@@ -30,13 +30,23 @@ class OrdersController < ApplicationController
   def admin_edit
     @order = Order.find(params[:id])
   end
+  
+  def admin_new
+    @order = Order.new
+  end
 
   # POST /orders
   def create
     @order = Order.new(order_params)
-    @order.user_id = 1
-    @order.member_id = current_admin.member_id
-    member = current_admin.member
+    if params[:order][:member_id]
+      @order.user_id = 1
+      @order.member_id = params[:order][:member_id]
+      member = Member.find(@order.member_id)
+    else
+      @order.user_id = 1
+      @order.member_id = current_admin.member_id
+      member = current_admin.member
+    end
     if params[:order][:job_type] == "Fixed"
       @order.amount = member.fixed_rate
       if params[:order][:fixed_type] == "Hotel"
@@ -49,6 +59,10 @@ class OrdersController < ApplicationController
     if params[:order][:job_type] == "Time Tracking"
       @order.amount = member.time_rate
       @order.cost = member.time_cost
+      if params[:order][:endtime]
+        @order.amount = @order.amount * ((params[:order][:endtime].to_time - params[:order][:starttime].to_time) / 1.hours).round(0.1)
+        @order.cost = @order.cost * ((params[:order][:endtime].to_time - params[:order][:starttime].to_time) / 1.hours).round(0.1)
+      end
     end
     if params[:order][:job_type] == "Day"
       @order.amount = member.day_rate
@@ -58,10 +72,29 @@ class OrdersController < ApplicationController
       @order.amount = member.night_rate
       @order.cost = member.night_cost
     end
-    @order.starttime = DateTime.now
+    unless params[:order][:starttime]
+      @order.starttime = DateTime.now
+    end
 
 
     if @order.save
+      
+      if params[:order][:member_id]
+        if @order.status == "Credit"
+          credit = @order.build_credit(name: @order.creditor_name, amount: @order.amount, status: "Unpaid")
+          credit.save
+        end
+          Account.first.update(sales: Account.first.sales + @order.amount)
+          Account.first.update(costs: Account.first.costs + @order.cost)
+      
+          respond_to do |format|
+
+            format.html {redirect_to admin_new_path(@order)}# show.html.erb
+            format.json { render json: @order, status: :created, location: @order }
+          end
+          
+      else
+        
       require 'net/http'
       message = @order.get_user_name + " has start a job!"
       params = {"app_id" => "e890308e-4333-4497-b7b6-59ae47145896", 
@@ -76,12 +109,13 @@ class OrdersController < ApplicationController
                                     'Authorization' => "Basic MjE4MWRlNWMtODJmMi00NWQ0LTk2OTctNjg3ZmU0N2I5ZTAw")
       request.body = params.as_json.to_json
       http.request(request)
-       
+      
       respond_to do |format|
 
         format.html {redirect_to edit_order_path(@order)}# show.html.erb
         format.json { render json: @order, status: :created, location: @order }
       end
+    end
       
     else
       respond_to do |format|
@@ -197,7 +231,7 @@ class OrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      params.require(:order).permit(:reference, :status, :job_type, :fixed_type, :creditor_name, :amount, :cost)
+      params.require(:order).permit(:reference, :status, :job_type, :fixed_type, :creditor_name, :amount, :cost, :member_id, :starttime, :endtime)
     end
  
     def pending_order
