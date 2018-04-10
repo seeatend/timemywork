@@ -1,0 +1,40 @@
+<div class="m-portlet">
+<div class="m-portlet__head">
+<div class="m-portlet__head-caption">
+<div class="m-portlet__head-title">
+<span class="m-portlet__head-icon m--hide">
+<i class="la la-gear"></i>
+</span>
+<h3 class="m-portlet__head-text">
+Start Order
+</h3>
+</div>
+</div>
+</div>
+<%= form_for(@order, html: {class: "m-form"}) do |form| %>
+    <div class="m-portlet__body">
+    <div class="form-group m-form__group">
+    <label for="exampleSelect1">
+    Job Type
+    </label>
+    <%= form.select :job_type, [['Time Tracking (时间)', 'Time Tracking'], ['Fixed (工)', 'Fixed'], ['Day (天)', 'Day'], ['O.N (夜)', 'O.N']], {}, {class: "form-control m-input m-input--air m-input--pill", id: "job_type"} %>
+
+    </div>
+    <div class="form-group m-form__group" id="business" style="display:none;">
+    <label for="exampleSelect1">
+    Type
+    </label>
+    <%= form.select :fixed_type, [['Normal (普通)', 'Normal'], ['Hotel (酒店)', 'Hotel']], {}, {class: "form-control m-input m-input--air m-input--pill"} %>
+
+    </div>
+
+    </div>
+
+    <div class="m-portlet__foot m-portlet__foot--fit">
+    <div class="m-form__actions m-form__actions">
+    <%= form.submit "Start", class: "btn btn-success btn-block", disable_with: "Saving..." %>
+    </div>
+    </div>
+    <% end %>
+<!--end::Form-->
+</div>
