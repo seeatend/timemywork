@@ -1,5 +1,59 @@
 // or, equivalent:
 class NewOrder extends React.Component {
+    constructor(){
+        super();
+        this.state = {showEditForm: false, orderId: 0};
+    }
+
+    createOrder(e, order){
+        e.preventDefault();
+
+        $.ajax(
+            {
+                url: '/orders',
+                data: {order: order},
+                type: 'POST',
+                dataType: 'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: this.success.bind(this),
+                error: this.fail.bind(this)
+            }
+        )
+
+
+    }
+
+    updateOrder(e, order){
+        e.preventDefault();
+        $.ajax(
+            {
+                url: '/orders/' + this.state,orderId,
+                data: {order: order},
+                type: 'PUT',
+                dataType: 'json',
+                xhrFields: {
+                    'withCredentials': true
+                },
+                success: this.success.bind(this),
+                error: this.fail.bind(this)
+            }
+        )
+        console.log('Update ORDER', order)
+    }
+
+    success(response) {
+        console.log(response);
+    }
+
+    fail(err) {
+        console.log(err)
+        alert('Error occurred!');
+    }
+
+
+
     render() {
         return (
             <div className="m-portlet">
@@ -10,14 +64,14 @@ class NewOrder extends React.Component {
                                 <i className="la la-gear"></i>
                             </span>
                             <h3 className="m-portlet__head-text">
-                                Start Order
+                                {this.state.showEditForm? 'End Order' : 'Start Order' }
                             </h3>
                         </div>
                     </div>
 
                 </div>
-
-                <StartOrderForm />
+                {!this.state.showEditForm && <StartOrderForm  submitForm={this.createOrder.bind(this)}  />}
+                {this.state.showEditForm && <EditOrderForm submitForm={this.updateOrder.bind(this)} orderId={this.state.orderId} />}
             </div>
         )
     }

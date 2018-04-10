@@ -1,25 +1,45 @@
-class NewOrder extends React.Component {
+class StartOrderForm extends React.Component {
 
     constructor(){
         super();
-        this.state = {showFixedType: false};
+        this.state = {
+            showFixedType: false,
+            order: {
+                job_type: 'Time Tracking',
+                fixed_type: 'Normal'
+            }
+        };
     }
 
     typeChanged(e) {
         //console.log(e.target.value);
-        this.setState({showFixedType: e.target.value === 'Fixed'});
+        this.setState(
+            {
+                showFixedType: e.target.value === 'Fixed',
+                order: { job_type: e.target.value}
+            }
+            );
+    }
+
+    fixedChanged(e) {
+        this.setState(
+            {
+                // order: { job_type: this.state.order.value, fixed_type: e.target.value }
+                order: { ...this.state.order,  fixed_type: e.target.value}
+            }
+        );
     }
 
 
     render() {
         return (
-            <form className="m-form">
+            <form className="m-form" >
                 <div className="m-portlet__body">
                     <div className="form-group m-form__group">
                         <label  htmlFor="exampleSelect1">
                             Job Type
                         </label>
-                        <select name="job_type" onChange={(e) => this.typeChanged(e) } id="job_type2" className="form-control m-input m-input--air m-input--pill">
+                        <select name="job_type" onChange={this.typeChanged.bind(this)} id="job_type2" className="form-control m-input m-input--air m-input--pill">
                             <option value="Time Tracking">Time Tracking (时间)</option>
                             <option value="Fixed">Fixed (工)</option>
                             <option value="Day">Day (天)</option>
@@ -31,7 +51,8 @@ class NewOrder extends React.Component {
                         <label htmlFor="exampleSelect1">
                             Type
                         </label>
-                        <select name="job_type" id="job_type"
+                        <select name="fixed_type" id="fixed_type"
+                                onChange={this.fixedChanged.bind(this)}
                                 className="form-control m-input m-input--air m-input--pill">
                             <option value="Normal">Normal (普通)</option>
                             <option value="Hotel">Hotel (酒店)</option>
@@ -43,10 +64,9 @@ class NewOrder extends React.Component {
 
                 <div className="m-portlet__foot m-portlet__foot--fit">
                     <div className="m-form__actions m-form__actions">
-                        <button className="btn  btn-success btn-block">Start</button>
+                        <button className="btn btn-success btn-block" onClick={(e) => this.props.submitForm(e, this.state.order)}>Start</button>
                     </div>
                 </div>
-
             </form>
         )
     }
