@@ -40,11 +40,12 @@ class NewOrder extends React.Component {
                 error: this.fail.bind(this)
             }
         )
-        console.log('Update ORDER', order)
+
     }
 
     success(response) {
-        console.log(response);
+        //console.log(response);
+        location.href = '/orders/new';
     }
 
     fail(err) {
