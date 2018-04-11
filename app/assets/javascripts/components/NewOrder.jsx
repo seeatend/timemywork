@@ -36,7 +36,7 @@ class NewOrder extends React.Component {
                 xhrFields: {
                     'withCredentials': true
                 },
-                success: this.success.bind(this),
+                success: this.updateSuccess.bind(this),
                 error: this.fail.bind(this)
             }
         )
@@ -45,7 +45,11 @@ class NewOrder extends React.Component {
 
     success(response) {
         //console.log(response);
-        location.href = '/orders/new';
+
+    }
+    updateSuccess(response) {
+        //console.log(response);
+        location.href = '/orders/new'
     }
 
     fail(err) {
