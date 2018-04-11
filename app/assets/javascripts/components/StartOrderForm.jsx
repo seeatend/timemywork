@@ -33,7 +33,7 @@ class StartOrderForm extends React.Component {
 
     handleSubmit(e) {
         this.setState({loading: true})
-        this.props.submitForm(e, this.props.order)
+        this.props.submitForm(e, this.state.order)
     }
 
 
