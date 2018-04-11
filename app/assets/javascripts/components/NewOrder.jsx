@@ -45,6 +45,7 @@ class NewOrder extends React.Component {
 
     success(response) {
         //console.log(response);
+        this.state = {showEditForm: true, orderId: response.id};
 
     }
     updateSuccess(response) {
