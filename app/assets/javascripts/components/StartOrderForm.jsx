@@ -4,6 +4,7 @@ class StartOrderForm extends React.Component {
         super();
         this.state = {
             showFixedType: false,
+            loading: false,
             order: {
                 job_type: 'Time Tracking',
                 fixed_type: 'Normal'
@@ -28,6 +29,11 @@ class StartOrderForm extends React.Component {
                 order: { ...this.state.order,  fixed_type: e.target.value}
             }
         );
+    }
+
+    handleSubmit(e) {
+        this.setState({loading: true})
+        this.props.submitForm(e, this.props.order)
     }
 
 
@@ -64,7 +70,9 @@ class StartOrderForm extends React.Component {
 
                 <div className="m-portlet__foot m-portlet__foot--fit">
                     <div className="m-form__actions m-form__actions">
-                        <button className="btn btn-success btn-block" onClick={(e) => this.props.submitForm(e, this.state.order)}>Start</button>
+                        <button disabled={this.state.loading} className="btn btn-success btn-block" onClick={(e) => this.handleSubmit(e)}>
+                            Start {this.state.loading && <i className="fa fa-refresh fa-spin fa-fw"></i>}
+                        </button>
                     </div>
                 </div>
             </form>

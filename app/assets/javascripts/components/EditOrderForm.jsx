@@ -3,6 +3,7 @@ class EditOrderForm extends React.Component {
         super();
         this.state = {
             showFixedType: false,
+            loading: false,
             order: {
                 status: 'Cash',
                 creditor_name: ''
@@ -25,6 +26,11 @@ class EditOrderForm extends React.Component {
                 order: { ...this.state.order,  creditor_name: e.target.value}
             }
         );
+    }
+
+    handleSubmit(e) {
+        this.setState({loading: true})
+        this.props.submitForm(e, this.props.order)
     }
 
     render() {
@@ -54,7 +60,9 @@ class EditOrderForm extends React.Component {
 
                 <div className="m-portlet__foot m-portlet__foot--fit">
                     <div className="m-form__actions m-form__actions">
-                        <button className="btn btn-danger btn-block" onClick={(e) => this.props.submitForm(e, this.state.order)}>End</button>
+                        <button disabled={this.state.loading}  className="btn btn-danger btn-block" onClick={(e) => this.handleSubmit(e)}>
+                            End {this.state.loading && <i className="fa fa-refresh fa-spin fa-fw"></i>}
+                        </button>
                     </div>
                 </div>
 
