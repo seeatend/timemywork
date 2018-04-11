@@ -29,7 +29,7 @@ class NewOrder extends React.Component {
         e.preventDefault();
         $.ajax(
             {
-                url: '/orders/' + this.state,orderId,
+                url: '/orders/' + this.state.orderId,
                 data: {order: order},
                 type: 'PUT',
                 dataType: 'json',
