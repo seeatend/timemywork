@@ -48,5 +48,5 @@ m.save
 admin = Admin.new
 admin.email = 'admin@domain.com'
 admin.password = '123456'
-admin.confirm_password = '123456'
+admin.password_confirmation = '123456'
 admin.member_id = m.id
