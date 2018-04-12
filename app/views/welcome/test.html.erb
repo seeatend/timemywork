@@ -1,0 +1,270 @@
+<% content_for :subnav do %>
+    <ul class="m-menu__subnav">
+      <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel m-menu__item--submenu-tabs"  data-menu-submenu-toggle="click" aria-haspopup="true">
+        <a  href="#" class="m-menu__link m-menu__toggle">
+          <i class="m-menu__link-icon flaticon-add"></i>
+          <span class="m-menu__link-text">
+																HR
+															</span>
+          <i class="m-menu__hor-arrow la la-angle-down"></i>
+          <i class="m-menu__ver-arrow la la-angle-right"></i>
+        </a>
+        <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">
+          <span class="m-menu__arrow m-menu__arrow--adjust"></span>
+          <ul class="m-menu__subnav">
+
+            <li class="m-menu__item "  data-redirect="true" aria-haspopup="true">
+              <a  href="../users/new" class="m-menu__link ">
+                <i class="m-menu__link-icon flaticon-users"></i>
+                <span class="m-menu__link-text">
+																			Register Member
+																		</span>
+              </a>
+            </li>
+            <li class="m-menu__item "  data-redirect="true" aria-haspopup="true">
+              <a  href="../members" class="m-menu__link ">
+                <i class="m-menu__link-icon flaticon-users"></i>
+                <span class="m-menu__link-text">
+																			All Members
+																		</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="m-menu__item  m-menu__item--actions"  aria-haspopup="true">
+        <div class="m-menu__link m-menu__link--toggle-skip">
+          <a href="/orders/new" class="btn btn-accent m-btn m-btn--icon m-btn--pill">
+																<span>
+																	<i class="la la-plus"></i>
+																	<span>
+																		New order
+																	</span>
+																</span>
+          </a>
+        </div>
+      </li>
+    </ul>
+<% end %>
+<% content_for :breadcrumb do %>
+    <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+      <li class="m-nav__item m-nav__item--home">
+        <a href="#" class="m-nav__link m-nav__link--icon">
+          <i class="m-nav__link-icon la la-home"></i>
+        </a>
+      </li>
+      <li class="m-nav__separator">
+        -
+      </li>
+      <li class="m-nav__item">
+        <a href="/" class="m-nav__link">
+											<span class="m-nav__link-text">
+												Dashboard
+											</span>
+        </a>
+      </li>
+      <li class="m-nav__separator">
+        -
+      </li>
+      <li class="m-nav__item">
+        <a href="" class="m-nav__link">
+											<span class="m-nav__link-text">
+												Orders
+											</span>
+        </a>
+      </li>
+
+    </ul>
+<% end %>
+
+
+<!--begin:: Widgets/Application Sales-->
+<div class="m-portlet m-portlet--full-height  m-portlet--rounded">
+  <div class="m-portlet__head">
+    <div class="m-portlet__head-caption">
+      <div class="m-portlet__head-title">
+        <h3 class="m-portlet__head-text">
+          <%= @page_title %>
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div class="m-portlet__body">
+    <div class="tab-content">
+      <div class="tab-pane active" id="m_widget11_tab1_content">
+        <!--begin::Widget 11-->
+        <div class="m-widget11">
+
+
+        </div>
+        <!--end::Widget 11-->
+      </div>
+      <div class="tab-pane" id="m_widget11_tab2_content">
+        <!--begin::Widget 11-->
+        <div class="m-widget11">
+          <div class="table-responsive">
+            <!--begin::Table-->
+            <table class="table">
+              <!--begin::Thead-->
+              <thead>
+              <tr>
+                <td class="m-widget11__label">
+                  #
+                </td>
+                <td class="m-widget11__app">
+                  Application
+                </td>
+                <td class="m-widget11__sales">
+                  Sales
+                </td>
+                <td class="m-widget11__change">
+                  Change
+                </td>
+                <td class="m-widget11__price">
+                  Avg Price
+                </td>
+                <td class="m-widget11__total m--align-right">
+                  Total
+                </td>
+              </tr>
+              </thead>
+              <!--end::Thead-->
+              <!--begin::Tbody-->
+              <tbody>
+              <tr>
+                <td>
+                  <label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
+                    <input type="checkbox">
+                    <span></span>
+                  </label>
+                </td>
+                <td>
+          																		<span class="m-widget11__title">
+          																			Loop
+          																		</span>
+                  <span class="m-widget11__sub">
+          																			CRM System
+          																		</span>
+                </td>
+                <td>
+                  19,200
+                </td>
+                <td>
+                  <div class="m-widget11__chart" style="height:50px; width: 100px">
+                    <iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                    <canvas id="m_chart_sales_by_apps_2_1" style="display: block; width: 0px; height: 0px;" height="0" width="0"></canvas>
+                  </div>
+                </td>
+                <td>
+                  $63
+                </td>
+                <td class="m--align-right m--font-brand">
+                  $34,740
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
+                    <input type="checkbox">
+                    <span></span>
+                  </label>
+                </td>
+                <td>
+          																		<span class="m-widget11__title">
+          																			Selto
+          																		</span>
+                  <span class="m-widget11__sub">
+          																			Powerful Website Builder
+          																		</span>
+                </td>
+                <td>
+                  24,310
+                </td>
+                <td>
+                  <div class="m-widget11__chart" style="height:50px; width: 100px">
+                    <iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                    <canvas id="m_chart_sales_by_apps_2_2" style="display: block; width: 0px; height: 0px;" height="0" width="0"></canvas>
+                  </div>
+                </td>
+                <td>
+                  $39
+                </td>
+                <td class="m--align-right m--font-brand">
+                  $46,010
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
+                    <input type="checkbox">
+                    <span></span>
+                  </label>
+                </td>
+                <td>
+          																		<span class="m-widget11__title">
+          																			Jippo
+          																		</span>
+                  <span class="m-widget11__sub">
+          																			The Best Selling App
+          																		</span>
+                </td>
+                <td>
+                  9,076
+                </td>
+                <td>
+                  <div class="m-widget11__chart" style="height:50px; width: 100px">
+                    <iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                    <canvas id="m_chart_sales_by_apps_2_3" style="display: block; width: 0px; height: 0px;" height="0" width="0"></canvas>
+                  </div>
+                </td>
+                <td>
+                  $105
+                </td>
+                <td class="m--align-right m--font-brand">
+                  $67,800
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
+                    <input type="checkbox">
+                    <span></span>
+                  </label>
+                </td>
+                <td>
+          																		<span class="m-widget11__title">
+          																			Verto
+          																		</span>
+                  <span class="m-widget11__sub">
+          																			Web Development Tool
+          																		</span>
+                </td>
+                <td>
+                  11,094
+                </td>
+                <td>
+                  <div class="m-widget11__chart" style="height:50px; width: 100px">
+                    <iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                    <canvas id="m_chart_sales_by_apps_2_4" style="display: block; width: 0px; height: 0px;" height="0" width="0"></canvas>
+                  </div>
+                </td>
+                <td>
+                  $16
+                </td>
+                <td class="m--align-right m--font-brand">
+                  $18,520
+                </td>
+              </tr>
+              </tbody>
+              <!--end::Tbody-->
+            </table>
+            <!--end::Table-->
+          </div>
+
+        </div>
+        <!--end::Widget 11-->
+      </div>
+    </div>
+  </div>
+</div>
+<!--end:: Widgets/Application Sales-->

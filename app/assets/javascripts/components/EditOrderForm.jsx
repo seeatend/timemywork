@@ -69,5 +69,4 @@ class EditOrderForm extends React.Component {
             </form>
         )
     }
-
 }

@@ -21,7 +21,6 @@ gem 'react-rails'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
