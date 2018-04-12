@@ -1,8 +1,9 @@
 class CreditorsController < ApplicationController
   before_action :set_creditors, only: [:show, :edit, :update, :destroy]
-
+  # layout false
   # GET /members
   def index
+    @page_title = 'All Creditors'
     @creditors = Credit.all
     @total_credits = @creditors.where(status: "Unpaid").sum(:amount)
   end
