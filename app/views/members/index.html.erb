@@ -150,8 +150,7 @@
                           </td>
                           <td class="m--align-right m--font-brand">
                             <% if Order.where(member_id: user).exists? %>
-                                $20
-                                <!--Order.where(member_id: user).pluck(:amount).inject(0){|sum,x| sum + x } -->
+                                $<%= Order.where(member_id: user).pluck(:amount).inject(0){|sum,x| sum + x } %>
                             <% else %>
                                 $0
                             <% end %>
