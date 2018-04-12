@@ -78,6 +78,9 @@
 
     </ul>
 <% end %>
+<% content_for :scripts do %>
+<%= javascript_include_tag 'application' %>
+<% end %>
 
 <div class="m-content">
   <div class="row">

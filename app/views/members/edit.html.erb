@@ -78,6 +78,25 @@
     </ul>
 <% end %>
 
+<% content_for :scripts do %>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function(){
+            $('#payment-type').on('change', function() {
+                if ( this.value == 'Credit')
+                {
+                    $("#business").show();
+                }
+                else
+                {
+                    $("#business").hide();
+                }
+            });
+
+
+        });
+    </script>
+<% end %>
+
 <div class="m-content">
   <div class="row">
     <div class="col-lg-12">

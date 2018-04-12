@@ -11,26 +11,3 @@ WebFont.load({
     }
 });
 
-$(document).ready(function(){
-    $('#payment-type').on('change', function() {
-        if ( this.value == 'Credit')
-        {
-            $("#business").show();
-        }
-        else
-        {
-            $("#business").hide();
-        }
-    });
-
-    $('#job_type').on('change', function() {
-        if ( this.value == 'Fixed')
-        {
-            $("#business").show();
-        }
-        else
-        {
-            $("#business").hide();
-        }
-    });
-});
