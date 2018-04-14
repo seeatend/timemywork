@@ -1,9 +1,10 @@
 class WelcomeController < ApplicationController
   before_action :authenticate_admin!
   before_action :must_be_admin
-  layout false
+  # layout false, only: [:dashboard]
   
   def dashboard
+    @page_title = 'Dashboard'
     @account = Account.first
     @orders = Order.all
     @users = Member.all
@@ -26,6 +27,12 @@ class WelcomeController < ApplicationController
     response = http.request(request) 
     puts response.body
   end
+def test
+  @account = Account.first
+  @orders = Order.all
+  @users = Member.all
+  @page_title = 'Testing'
+end
   
   private 
   

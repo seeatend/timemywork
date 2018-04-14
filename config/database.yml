@@ -17,6 +17,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -79,7 +80,8 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: mms-timemywork_production
-  username: mms-timemywork
-  password: <%= ENV['MMS-TIMEMYWORK_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
+#    <<: *default
+#  database: mms-timemywork_production
+#  username: mms-timemywork
+#  password: <%= ENV['MMS-TIMEMYWORK_DATABASE_PASSWORD'] %>

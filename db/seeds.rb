@@ -17,12 +17,7 @@ Customer.create!([
   { name: 'Customer 003' },
   { name: 'Customer 004' }
 ])
-User.create!([
-  { name: 'User 001' },
-  { name: 'User 002' },
-  { name: 'User 003' },
-  { name: 'User 004' }
-])
+
 Order.create!([
   { reference: 'ORD001', user_id: 1, starttime: Time.now - 10.hours, endtime: Time.now - 5.hours },
   { reference: 'ORD002', user_id: 1, starttime: Time.now - 10.hours, endtime: Time.now - 5.hours },
@@ -30,3 +25,5 @@ Order.create!([
   { reference: 'ORD004', user_id: 1, starttime: Time.now - 10.hours, endtime: Time.now - 5.hours },
   { reference: 'ORD005', user_id: 1, starttime: Time.now - 10.hours, endtime: Time.now - 5.hours }
 ])
+
+# name, :email, :time_rate, :day_rate, :night_rate, :time_cost, :day_cost, :night_cost, :fixed_rate

@@ -1,13 +1,17 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
-
+  # layout false
   # GET /members
   def index
+    @page_title = 'All Members'
+
     @users = Member.all
   end
 
   # GET /members/1
   def show
+    @page_title = 'Show'
+
   end
 
   # GET /members/new
@@ -17,6 +21,7 @@ class MembersController < ApplicationController
 
   # GET /members/1/edit
   def edit
+    @page_title = 'Edit'
   end
 
   # POST /members
