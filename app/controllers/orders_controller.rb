@@ -148,7 +148,12 @@ class OrdersController < ApplicationController
       if params[:order][:amount].present?
         puts "EXIST"
         if @order.status == "Credit"
-          @order.credit.update(amount: @order.amount)
+          if @order.credit
+            @order.credit.update(amount: @order.amount, name: @order.creditor_name)
+          else
+            credit = @order.build_credit(name: @order.creditor_name, amount: @order.amount, status: "Unpaid")
+            credit.save
+          end
         end
         sales = Account.first.sales - @amount + @order.amount
         costs = Account.first.costs - @cost + @order.cost

@@ -134,6 +134,28 @@
 
                   </div>
                 </div>
+                <div class="form-group m-form__group">
+                  <label>
+                    Status
+                  </label>
+                  <div class="input-group">
+                    <%= form.select :status, ['Cash', 'Credit'], class: "form-control m-input", id: "status-select"  %>
+
+                  </div>
+                </div>
+                <% if @order.status == "Credit" %>
+                <div class="form-group m-form__group" id="creditor_name">
+                <% else %>
+                <div class="form-group m-form__group" id="creditor_name" style="display:none;">
+                <% end %>
+                  <label>
+                    Creditor Name
+                  </label>
+                  <div class="input-group">
+                    <%= form.text_field :creditor_name, class: "form-control m-input"  %>
+
+                  </div>
+                </div>
 
               </div>
             </div>
@@ -153,3 +175,15 @@
 
   </div>
 </div>
+<script>
+  
+  $( document ).ready(function() {
+    $("#order_status").on("change", function() {
+console.log( "ready!" );
+        $("#creditor_name").show();
+  
+      // Call form.submit here if need be
+    });
+  });
+  
+  </script>
