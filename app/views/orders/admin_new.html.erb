@@ -76,7 +76,7 @@
                     Start Time:
                   </label>
                   <div class="input-group date">
-                    <%= form.text_field :starttime, class: "form-control m-input", id: "m_datetimepicker_2", placeholder: "Select date and time" %>
+                    <%= form.text_field :starttime, class: "form-control m-input", id: "m_datetimepicker_2", value: Time.now %>
 
                     <div class="input-group-append">
                                  													<span class="input-group-text">
@@ -93,7 +93,7 @@
                     End Time:
                   </label>
                   <div class="input-group date">
-                    <%= form.text_field :endtime, class: "form-control m-input", id: "m_datetimepicker_2", placeholder: "Select date and time" %>
+                    <%= form.text_field :endtime, class: "form-control m-input", id: "m_datetimepicker_2", value: Time.now %>
                     <div class="input-group-append">
                                  													<span class="input-group-text">
                                  														<i class="la la-calendar-check-o glyphicon-th"></i>
