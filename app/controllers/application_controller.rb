@@ -6,6 +6,5 @@ class ApplicationController < ActionController::Base
 
    def layout
      devise_controller? ? false : "application"
-
    end
 end
