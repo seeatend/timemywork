@@ -1,6 +1,10 @@
+require 'sendgrid-ruby'
+include SendGrid
+
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :update, :destroy]
   before_action :pending_order, only: [:new]
+  
 
   # GET /orders
   def index
@@ -110,6 +114,18 @@ class OrdersController < ApplicationController
       request.body = params.as_json.to_json
       http.request(request)
       
+      
+
+      from = Email.new(email: 'admin@ysl.com')
+      to = Email.new(email: 'mms.monsoon888@gmail.com')
+      subject = @order.get_user_name + ' has start a job!'
+      content = Content.new(type: 'text/plain', value: 'Job Type: ' + @order.job_type)
+      mail = Mail.new(from, subject, to, content)
+
+      sg = SendGrid::API.new(api_key: "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")
+      response = sg.client.mail._('send').post(request_body: mail.to_json)
+
+      
       respond_to do |format|
 
         format.html {redirect_to edit_order_path(@order)}# show.html.erb
@@ -178,6 +194,16 @@ class OrdersController < ApplicationController
                                       'Authorization' => "Basic MjE4MWRlNWMtODJmMi00NWQ0LTk2OTctNjg3ZmU0N2I5ZTAw")
         request.body = params.as_json.to_json
         http.request(request)
+        
+        from = Email.new(email: 'admin@ysl.com')
+        to = Email.new(email: 'mms.monsoon888@gmail.com')
+        subject = @order.get_user_name + ' has ended a job!'
+        content = Content.new(type: 'text/plain', value: 'Job Type: ' + @order.job_type)
+        mail = Mail.new(from, subject, to, content)
+
+        sg = SendGrid::API.new(api_key: "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")
+        response = sg.client.mail._('send').post(request_body: mail.to_json)
+        
         
         if @order.status == "Credit"
           credit = @order.build_credit(name: @order.creditor_name, amount: @order.amount, status: "Unpaid")
