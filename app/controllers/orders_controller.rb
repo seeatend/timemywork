@@ -117,7 +117,7 @@ class OrdersController < ApplicationController
       
 
       from = Email.new(email: 'admin@ysl.com')
-      to = Email.new(email: 'yslysl8888@gmail.com')
+      to = Email.new(email: 'mms.monsoon888@gmail.com')
       subject = @order.get_user_name + ' has start a job!'
       content = Content.new(type: 'text/plain', value: 'Job Type: ' + @order.job_type)
       mail = Mail.new(from, subject, to, content)
@@ -196,13 +196,14 @@ class OrdersController < ApplicationController
         http.request(request)
         
         from = Email.new(email: 'admin@ysl.com')
-        to = Email.new(email: 'yslysl8888@gmail.com')
+        to = Email.new(email: 'mms.monsoon888@gmail.com')
         subject = @order.get_user_name + ' has ended a job!'
         content = Content.new(type: 'text/plain', value: 'Job Type: ' + @order.job_type)
         mail = Mail.new(from, subject, to, content)
 
         sg = SendGrid::API.new(api_key: "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")
         response = sg.client.mail._('send').post(request_body: mail.to_json)
+    
         
         
         if @order.status == "Credit"
