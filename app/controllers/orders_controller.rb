@@ -120,7 +120,7 @@ class OrdersController < ApplicationController
       to = Email.new(email: 'yslysl8888@gmail.com')
       subject = @order.get_user_name + ' has start a job!'
       content = Content.new(type: 'text/plain', value: 'Job Type: ' + @order.job_type)
-      mail = Mail.new(from, subject, to, content)
+      mail = Sendgrid::Mail.new(from, subject, to, content)
       puts "EMAIL HERE"
       sg = SendGrid::API.new(api_key: "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")
       response = sg.client.mail._('send').post(request_body: mail.to_json)
@@ -196,7 +196,7 @@ class OrdersController < ApplicationController
         http.request(request)
  
         from = Email.new(email: 'admin@ysl.com')
-        to = Email.new(email: 'yslysl8888gmail.com')
+        to = Email.new(email: 'yslysl8888@gmail.com')
         subject = @order.get_user_name + ' has ended a job!'
         content = Content.new(type: 'text/plain', value: 'Job Type: ' + @order.job_type)
         mail = SendGrid::Mail.new(from, subject, to, content)
