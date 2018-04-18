@@ -121,10 +121,10 @@ class OrdersController < ApplicationController
       subject = @order.get_user_name + ' has start a job!'
       content = Content.new(type: 'text/plain', value: 'Job Type: ' + @order.job_type)
       mail = Mail.new(from, subject, to, content)
-
+      puts "EMAIL HERE"
       sg = SendGrid::API.new(api_key: "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")
       response = sg.client.mail._('send').post(request_body: mail.to_json)
-
+      puts response
       
       respond_to do |format|
 
@@ -200,10 +200,11 @@ class OrdersController < ApplicationController
         subject = @order.get_user_name + ' has ended a job!'
         content = Content.new(type: 'text/plain', value: 'Job Type: ' + @order.job_type)
         mail = Mail.new(from, subject, to, content)
-
+        puts "EMAIL HERE"
         sg = SendGrid::API.new(api_key: "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")
         response = sg.client.mail._('send').post(request_body: mail.to_json)
-    
+        puts response.status_code
+        puts response.body
         
         
         if @order.status == "Credit"
