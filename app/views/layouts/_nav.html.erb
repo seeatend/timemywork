@@ -1,3 +1,4 @@
+<% unless current_page?(new_order_path) %>
 <ul class="m-menu__subnav">
   <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel m-menu__item--submenu-tabs"  data-menu-submenu-toggle="click" aria-haspopup="true">
     <a  href="#" class="m-menu__link m-menu__toggle">
@@ -106,3 +107,4 @@
     </div>
   </li>
 </ul>
+<% end %>

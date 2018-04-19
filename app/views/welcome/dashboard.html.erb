@@ -230,7 +230,10 @@
                       Orders Completed
                     </td>
                     <td class="m-widget11__change">
-                      Costs / Task
+                      Costs
+                    </td>
+                    <td class="m-widget11__change">
+                      Amount
                     </td>
                     <td class="m-widget11__price">
                       Working Days
@@ -257,7 +260,10 @@
                           <%= user.orders.count %>
                         </td>
                         <td>
-                          <%= user.job_rate %>
+                          <%= user.orders.sum(:cost) %>
+                        </td>
+                        <td>
+                          <%= user.orders.sum(:amount) %>
                         </td>
                         <td>
                           <%= ((DateTime.now.to_time - user.created_at.to_time) / 1.day).floor %>
