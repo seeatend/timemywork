@@ -140,6 +140,7 @@
                           <td class="m--align-right m--font-brand">
                             <% unless user.status == "Paid" %>
                                 <%= link_to 'Paid', creditor_path(user.id), method: :put %>
+                            
                             <% end %>
                           </td>
                           </tr>

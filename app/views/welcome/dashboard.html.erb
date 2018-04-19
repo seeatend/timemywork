@@ -220,9 +220,6 @@
                   <!--begin::Thead-->
                   <thead>
                   <tr>
-                    <td class="m-widget11__label">
-                      #ID
-                    </td>
                     <td class="m-widget11__app">
                       User Name
                     </td>
@@ -231,9 +228,6 @@
                     </td>
                     <td class="m-widget11__change">
                       Costs
-                    </td>
-                    <td class="m-widget11__change">
-                      Amount
                     </td>
                     <td class="m-widget11__price">
                       Working Days
@@ -249,9 +243,6 @@
                   <tr>
                     <% @users.each do |user| %>
                         <td>
-
-                        </td>
-                        <td>
 																		<span class="m-widget11__title">
 																			<%= user.name %>
 																		</span>
@@ -260,16 +251,13 @@
                           <%= user.orders.count %>
                         </td>
                         <td>
-                          <%= user.orders.sum(:cost) %>
-                        </td>
-                        <td>
-                          <%= user.orders.sum(:amount) %>
+                          $<%= user.orders.sum(:cost) %>
                         </td>
                         <td>
                           <%= ((DateTime.now.to_time - user.created_at.to_time) / 1.day).floor %>
                         </td>
                         <td class="m--align-right m--font-brand">
-                          $<%= Order.where(member_id: user).pluck(:amount).inject(0){|sum,x| sum + x } %>
+                          $<%= user.orders.sum(:amount) %>
 
 
                         </td>

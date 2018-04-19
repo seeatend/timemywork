@@ -38,6 +38,20 @@ class OrdersController < ApplicationController
   def admin_new
     @order = Order.new
   end
+  
+  def paid_company
+    @order = Order.find(params[:id])
+    @member = @order.member
+    @order.update(to_company: "Paid")
+    redirect_to member_path(@member)
+  end
+  
+  def company_return
+    @order = Order.find(params[:id])
+    @member = @order.member
+    @order.update(to_company: nil)
+    redirect_to member_path(@member)
+  end
 
   # POST /orders
   def create

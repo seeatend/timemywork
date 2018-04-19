@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   resources :products
   resources :creditors
   put '/creditors/:id/paid' => 'creditors#paid_credits', :as => 'paid_credits'
-
+  put '/orders/:id/paid' => 'orders#paid_company', :as => 'paid_company'
+  put '/orders/:id/return' => 'orders#company_return', :as => 'company_return'
   get '/orders/admin-edit/:id' => 'orders#admin_edit', :as => 'admin_edit'
   get '/order/new/' => 'orders#admin_new', :as => 'admin_new'
   get '/notify' => 'welcome#notify', :as => 'notify'

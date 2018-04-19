@@ -32,9 +32,91 @@
 <% end %>
 
 <div class="m-content">
-  <div class="row">
-    <div class="col-lg-12">
-      <!--begin::Portlet-->
+	<div class="row">
+		<div class="col-xl-3 col-lg-4">
+			<div class="m-portlet m-portlet--full-height   m-portlet--rounded">
+				<div class="m-portlet__body">
+					<div class="m-card-profile">
+						<div class="m-card-profile__title m--hide">
+							Your Profile
+						</div>
+						<div class="m-card-profile__pic">
+							<div class="m-card-profile__pic-wrapper">
+								<img src="/assets/demo/demo10/media/img/logo/logo2.png" alt=""/>
+							</div>
+						</div>
+						<div class="m-card-profile__details">
+							<span class="m-card-profile__name">
+                <%= @member.name %>
+              </span>
+							<a href="" class="m-card-profile__email m-link">
+								<%= @member.email %>
+							</a>
+						</div>
+					</div>
+					<div class="m-portlet__body-separator"></div>
+					<div class="m-widget1 m-widget1--paddingless">
+						<div class="m-widget1__item">
+							<div class="row m-row--no-padding align-items-center">
+								<div class="col">
+									<h3 class="m-widget1__title">
+										Member Profit
+									</h3>
+								</div>
+								<div class="col m--align-right">
+									<span class="m-widget1__number m--font-brand">
+										$<%= @member.orders.sum(:cost) %>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="m-widget1__item">
+							<div class="row m-row--no-padding align-items-center">
+								<div class="col">
+									<h3 class="m-widget1__title">
+										Total Profit
+									</h3>
+								</div>
+								<div class="col m--align-right">
+									<span class="m-widget1__number m--font-brand">
+										$<%= @member.orders.sum(:amount) %>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="m-widget1__item">
+							<div class="row m-row--no-padding align-items-center">
+								<div class="col">
+									<h3 class="m-widget1__title">
+										Amount Paid (To Company)
+									</h3>
+								</div>
+								<div class="col m--align-right">
+									<span class="m-widget1__number m--font-brand">
+										$<%= @member.orders.where(to_company: "Paid").sum(:amount) -   @member.orders.where(to_company: "Paid").sum(:cost) %>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="m-widget1__item">
+							<div class="row m-row--no-padding align-items-center">
+								<div class="col">
+									<h3 class="m-widget1__title">
+										Amount Yet To Paid
+									</h3>
+								</div>
+								<div class="col m--align-right">
+									<span class="m-widget1__number m--font-brand">
+										$<%= (@member.orders.sum(:amount) - @member.orders.sum(:cost)) - (@member.orders.where(to_company: "Paid").sum(:amount) -   @member.orders.where(to_company: "Paid").sum(:cost)) %>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xl-9 col-lg-8">
       <div class="m-portlet">
         <div class="m-portlet__head">
           <div class="m-portlet__head-caption">
@@ -49,170 +131,255 @@
           </div>
         </div>
 
-        <%= form_for(@member, html: {class: "m-form"}) do |form| %>
             <div class="m-portlet__body">
               <div class="m-form__section m-form__section--first">
                 <div class="form-group m-form__group">
                   <label for="example_input_full_name">
                     User Nick Name:
                   </label>
-                  <%= form.text_field :name, id: :member_name, class: "form-control m-input", placeholder: "Enter full name" %>
-                  <span class="m-form__help">
-          														Please enter user's nick name
-          													</span>
+                  <p>
+                    Jessie
+                  </p>
+                
                 </div>
                 <div class="form-group m-form__group">
                   <label>
                     Email address:
                   </label>
-                  <%= form.text_field :email, id: :member_email, class: "form-control m-input", placeholder: "Enter email" %>
-
-                  <span class="m-form__help">
-          														We'll never share your email with anyone else
-          													</span>
+                  <p>
+                    <%= @member.email %>
+                  </p>
+                  
+                  
                 </div>
                 <div class="form-group m-form__group">
                   <label>
                     Fixed rate
                   </label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-                    </div>
-                    <%= form.number_field :fixed_rate, id: :member_job_rate, class: "form-control m-input"  %>
 
-                  </div>
+                    <p>
+                      $<%= @member.fixed_rate %>
+                    </p>
+                    
                 </div>
                 <div class="form-group m-form__group">
                   <label>
                     Time rate (per hour)
                   </label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-                    </div>
-                    <%= form.number_field :time_rate, id: :member_job_rate, class: "form-control m-input"  %>
 
-                  </div>
+                    <p>
+                      $<%= @member.time_rate %>
+                    </p>
+                    
+
                 </div>
                 <div class="form-group m-form__group">
                   <label>
                     Day rate
                   </label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-                    </div>
-                    <%= form.number_field :day_rate, id: :member_job_rate, class: "form-control m-input"  %>
+                    <p>
+                      $<%= @member.day_rate %>
+                    </p>
+                    
 
-                  </div>
                 </div>
                 <div class="form-group m-form__group">
                   <label>
                     Night rate
                   </label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-                    </div>
-                    <%= form.number_field :night_rate, id: :member_job_rate, class: "form-control m-input"  %>
 
-                  </div>
+                    <p>
+                      $<%= @member.night_rate %>
+                    </p>
+                    
                 </div>
 
                 <div class="form-group m-form__group">
                   <label>
                     Hotel Fixed cost
                   </label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-                    </div>
-                    <%= form.number_field :hotel_fixed_cost, id: :member_job_rate, class: "form-control m-input"  %>
 
-                  </div>
+                    <p>
+                      $<%= @member.hotel_fixed_cost %>
+                    </p>
+                    
                 </div>
                 <div class="form-group m-form__group">
                   <label>
                     Normal Fixed cost
                   </label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-                    </div>
-                    <%= form.number_field :normal_fixed_cost, id: :member_job_rate, class: "form-control m-input"  %>
 
-                  </div>
+                    <p>
+                      $<%= @member.normal_fixed_cost %>
+                    </p>
+                   
                 </div>
 
                 <div class="form-group m-form__group">
                   <label>
                     Time Cost (per hour)
                   </label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-                    </div>
-                    <%= form.number_field :time_cost, id: :member_job_rate, class: "form-control m-input"  %>
 
-                  </div>
+                    <p>
+                      $<%= @member.time_cost %>
+                    </p>
+                   
                 </div>
                 <div class="form-group m-form__group">
                   <label>
                     Day Cost
                   </label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-                    </div>
-                    <%= form.number_field :day_cost, id: :member_job_rate, class: "form-control m-input"  %>
 
-                  </div>
+                    <p>
+                      $<%= @member.day_cost %>
+                    </p>
+                  
                 </div>
                 <div class="form-group m-form__group">
                   <label>
                     Night Cost
                   </label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-          															<span class="input-group-text" id="basic-addon2">
-          																$
-          															</span>
-                    </div>
-                    <%= form.number_field :night_cost, id: :member_job_rate, class: "form-control m-input"  %>
 
-                  </div>
+                    <p>
+                      $<%= @member.night_cost %>
+                    </p>
+                   
                 </div>
               </div>
             </div>
             <div class="m-portlet__foot m-portlet__foot--fit">
-              <div class="m-form__actions m-form__actions">
-                <%= form.submit "Update", class: "btn btn-primary" %>
+              <div class="m-form__actions m-form__actions" style="padding: 10px;">
+                <%= link_to "Edit", edit_member_path, class: "btn btn-primary" %>
                 <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
               </div>
             </div>
-        <% end %>
         <!--end::Form-->
       </div>
-      <!--end::Portlet-->
+		</div>
+	</div>
+<div class="row">
+  <div class="col-xl-12">
+    <!--begin:: Widgets/Application Sales-->
+    <div class="m-portlet m-portlet--full-height  m-portlet--rounded">
+      <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+          <div class="m-portlet__head-title">
+            <h3 class="m-portlet__head-text">
+              All Members
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="m-portlet__body">
+        <div class="tab-content">
+          <div class="tab-pane active" id="m_widget11_tab1_content">
+            <!--begin::Widget 11-->
+            <div class="m-widget11">
+              <div class="table-responsive">
+                <!--begin::Table-->
+                <table class="table">
+                  <!--begin::Thead-->
+                  <thead>
+                  <tr>
+                    <td>
+                      ID
+                    </td>
+                    <td>
+                      Job Type
+                    </td>
+                    <td>
+                      Time Start
+                    </td>
+                    <td>
+                      Cost
+                    </td>
+                    <td>
+                      Amount
+                    </td>
+                    
+                    <td>
+                      Status
+                    </td>
+                    <td>
+                      Creditor Name
+                    </td>
+                    <td>
+                      Amount To Company
+                    </td>
+                    <td>
+                      Amount Paid
+                    </td>
+                    <td>
+                      Action
+                    </td>
 
+                  </tr>
+                  </thead>
+                  <!--end::Thead-->
+                  <!--begin::Tbody-->
+                  <tbody>
+                    <% @orders.each do |order| %>
+                  <tr>
+                    
+                        <td>
+																			<%= order.id %>
+                        </td>
+                        <td>
+													<%= order.job_type %>
+                        </td>
+                        <td>
+                          <%= order.starttime.strftime('%m-%d-%y %H:%M') %>
+                        </td>
+                        <td>
+                          <%= order.cost %>
+                        </td>
+                        <td>
+                          <%= order.cost %>
+                        </td>
+                        <td>
+                          <%= order.amount %>
+                        </td>
+                        <td>
+                          <%= order.status %>
+                        </td>
+                        <td>
+                          <%= order.amount - order.cost %>
+                        </td>
+                        <td>
+                          <% if order.to_company == "Paid" %>
+                          <%= order.amount - order.cost %>
+                          <% else %>
+                          0
+                          <% end %>
+                        </td>
+                        <td>
+                          <% unless order.to_company == "Paid" %>
+                              <%= link_to 'Paid', paid_company_path(order.id), method: :put %>
+                          <% else %>
+                              <%= link_to 'Revoke', company_return_path(order.id), method: :put %>
+                          <% end %>
+                        </td>
+                        <td class="m--align-right m--font-brand">
+
+
+                        </td>
+                      
+                        </tr>
+                        <% end %>
+                    </tbody>
+                  <!--end::Tbody-->
+                </table>
+                <!--end::Table-->
+              </div>
+              
+            </div>
+            <!--end::Widget 11-->
+          </div>
+          
+        </div>
+      </div>
     </div>
-
+    <!--end:: Widgets/Application Sales-->
   </div>
+</div>
 </div>
