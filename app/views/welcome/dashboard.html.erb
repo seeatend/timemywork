@@ -244,7 +244,8 @@
                     <% @users.each do |user| %>
                         <td>
 																		<span class="m-widget11__title">
-																			<%= user.name %>
+                                      
+																			<%= link_to user.name, member_path(user.id) %>
 																		</span>
                         </td>
                         <td>
