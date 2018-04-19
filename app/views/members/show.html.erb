@@ -345,15 +345,13 @@
                           <%= order.amount - order.cost %>
                         </td>
                         <td>
-                          <%= order.amount - order.cost %>
-                        </td>
-                        <td>
                           <% if order.to_company == "Paid" %>
                           <%= order.amount - order.cost %>
                           <% else %>
                           0
                           <% end %>
                         </td>
+                    
                         <td>
                           <% unless order.to_company == "Paid" %>
                               <%= link_to 'Paid', paid_company_path(order.id), method: :put %>
