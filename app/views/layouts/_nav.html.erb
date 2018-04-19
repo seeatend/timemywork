@@ -1,5 +1,6 @@
-<% unless current_page?(new_order_path) %>
+
 <ul class="m-menu__subnav">
+  <% unless current_page?(new_order_path) %>
   <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel m-menu__item--submenu-tabs"  data-menu-submenu-toggle="click" aria-haspopup="true">
     <a  href="#" class="m-menu__link m-menu__toggle">
       <i class="m-menu__link-icon flaticon-add"></i>
@@ -84,6 +85,7 @@
       </ul>
     </div>
   </li>
+  <% end %>
   <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel m-menu__item--submenu-tabs"  data-menu-submenu-toggle="click" aria-haspopup="true">
     <a  href="/admins/sign_out" class="m-menu__link">
       <i class="m-menu__link-icon"></i>
@@ -94,6 +96,7 @@
     </a>
 
   </li>
+  <% unless current_page?(new_order_path) %>
   <li class="m-menu__item  m-menu__item--actions"  aria-haspopup="true">
     <div class="m-menu__link m-menu__link--toggle-skip">
       <a href="/order/new" class="btn btn-accent m-btn m-btn--icon m-btn--pill">
