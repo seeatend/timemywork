@@ -17,7 +17,7 @@
 #                      { name: 'Customer 003' },
 #                      { name: 'Customer 004' }
 #                  ])
-Order.delete_all
+# Order.delete_all
 
 100.times.each { |i|
       Order.create!({
