@@ -9,7 +9,18 @@ class OrdersController < ApplicationController
   # GET /orders
   def index
     @orders = Order.all.order(endtime: :desc)
-    
+
+    if params[:start]
+      start_date = params[:start].to_time
+      @orders = @orders.where("endtime >= ?", start_date)
+    end
+
+    if params[:end]
+      end_date = params[:end].to_time
+      @orders = @orders.where("endtime <= ?", end_date)
+    end
+
+
     respond_to do |format|
 
       format.html

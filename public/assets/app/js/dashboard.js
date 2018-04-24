@@ -1293,25 +1293,30 @@ var Dashboard = function() {
         }
 
         var picker = $('#m_dashboard_daterangepicker');
-        var start = moment();
-        var end = moment();
+        console.log($(picker).attr("data-startDate"));
+        var startDateStr = $(picker).attr("data-start-date");
+        var endDateStr = $(picker).attr("data-end-date");
+        var start = startDateStr ? new moment(startDateStr) : moment();
+        var end = endDateStr ? new moment(endDateStr) : moment();
+        var label = '';
+        var title = '';
+        var range = '';
+
+        if ((end - start) < 100) {
+            title = 'Today:';
+            range = start.format('MMM D');
+        } else if (label == 'Yesterday') {
+            title = 'Yesterday:';
+            range = start.format('MMM D');
+        } else {
+            range = start.format('MMM D') + ' - ' + end.format('MMM D');
+        }
+        picker.find('.m-subheader__daterange-date').html(range);
+        picker.find('.m-subheader__daterange-title').html(title);
 
         function cb(start, end, label) {
-            var title = '';
-            var range = '';
+            location.href = '/?start=' + start._d + '&end=' + end._d;
 
-            if ((end - start) < 100) {
-                title = 'Today:';
-                range = start.format('MMM D');
-            } else if (label == 'Yesterday') {
-                title = 'Yesterday:';
-                range = start.format('MMM D');
-            } else {
-                range = start.format('MMM D') + ' - ' + end.format('MMM D');
-            }
-
-            picker.find('.m-subheader__daterange-date').html(range);
-            picker.find('.m-subheader__daterange-title').html(title);
         }
 
         picker.daterangepicker({
@@ -1328,13 +1333,28 @@ var Dashboard = function() {
             }
         }, cb);
 
-        cb(start, end, '');
+        //cb(start, end, '');
+    }
+
+    function getUrlVars()
+    {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++)
+        {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
     }
 
     var datatableLatestOrders = function() {
         if ($('#m_datatable_latest_orders').length === 0) {
             return;
         }
+
+        var params = getUrlVars();
 
         var datatable = $('.m_datatable').mDatatable({
             data: {
@@ -1343,7 +1363,7 @@ var Dashboard = function() {
                     read: {
                         //url: 'https://keenthemes.com/metronic/preview/inc/api/datatables/demos/default.php'
                         //url: 'https://desolate-fortress-98739.herokuapp.com/orders.json',
-                        url: 'https://desolate-fortress-98739.herokuapp.com/orders.json',
+                        url: '/orders.json?start=' + params['start'] + '&end='+params['end'],
                         method: 'GET'
                     }
                 },

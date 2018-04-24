@@ -1,7 +1,10 @@
 
 
 <% content_for :header_right do %>
-    <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
+    <span class="m-subheader__daterange" id="m_dashboard_daterangepicker"
+          data-start-date="<%= @start_date %>"
+          data-end-date="<%= @end_date %>"
+    >
 									<span class="m-subheader__daterange-label">
 										<span class="m-subheader__daterange-title"></span>
 										<span class="m-subheader__daterange-date m--font-brand"></span>
