@@ -20,7 +20,6 @@ class OrdersController < ApplicationController
       @orders = @orders.where("endtime <= ?", end_date)
     end
 
-
     respond_to do |format|
 
       format.html
