@@ -9,6 +9,8 @@ class WelcomeController < ApplicationController
     @end_date = params[:end].to_time if params[:end]
     @account = Account.first
     @orders = Order.all.where("endtime >= ? AND endtime <= ?", @start_date, @end_date)
+    @total_amount = @orders.sum(:amount)
+    @total_cost = @orders.sum(:cost)
     @users = Member.all
   end
   

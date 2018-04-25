@@ -132,7 +132,7 @@
           <div class="m-portlet__body">
             <div class="m-widget26">
               <div class="m-widget26__number">
-                $<%= @account.sales %>
+                $<%= @total_amount %>
                 <small>
                   All Sales
                 </small>
@@ -148,7 +148,7 @@
           <div class="m-portlet__body">
             <div class="m-widget26">
               <div class="m-widget26__number">
-                $<%= @account.costs %>
+                $<%= @total_cost %>
                 <small>
                   Total Costs
                 </small>
@@ -181,7 +181,7 @@
           <div class="m-portlet__body">
             <div class="m-widget26">
               <div class="m-widget26__number">
-                $<%= @account.sales - @account.costs %>
+                $<%= @total_amount - @total_cost %>
                 <small>
                   Gross Profits
                 </small>
