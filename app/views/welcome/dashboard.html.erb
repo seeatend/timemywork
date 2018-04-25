@@ -1,7 +1,10 @@
 
 
 <% content_for :header_right do %>
-    <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
+    <span class="m-subheader__daterange" id="m_dashboard_daterangepicker"
+          data-start-date="<%= @start_date %>"
+          data-end-date="<%= @end_date %>"
+    >
 									<span class="m-subheader__daterange-label">
 										<span class="m-subheader__daterange-title"></span>
 										<span class="m-subheader__daterange-date m--font-brand"></span>
@@ -129,7 +132,7 @@
           <div class="m-portlet__body">
             <div class="m-widget26">
               <div class="m-widget26__number">
-                $<%= @account.sales %>
+                $<%= @total_amount %>
                 <small>
                   All Sales
                 </small>
@@ -145,7 +148,7 @@
           <div class="m-portlet__body">
             <div class="m-widget26">
               <div class="m-widget26__number">
-                $<%= @account.costs %>
+                $<%= @total_cost %>
                 <small>
                   Total Costs
                 </small>
@@ -178,7 +181,7 @@
           <div class="m-portlet__body">
             <div class="m-widget26">
               <div class="m-widget26__number">
-                $<%= @account.sales - @account.costs %>
+                $<%= @total_amount - @total_cost %>
                 <small>
                   Gross Profits
                 </small>

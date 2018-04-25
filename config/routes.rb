@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
-  
+
+  root 'welcome#dashboard'
   resources :members
   devise_for :admins
-  root 'welcome#dashboard'
-  #devise_for :users  
+  #devise_for :users
   resources :users
   resources :customers
   resources :orders
   resources :products
   resources :creditors
+  resources :tokens, :only => [:create]
   put '/creditors/:id/paid' => 'creditors#paid_credits', :as => 'paid_credits'
   put '/orders/:id/paid' => 'orders#paid_company', :as => 'paid_company'
   put '/orders/:id/return' => 'orders#company_return', :as => 'company_return'
