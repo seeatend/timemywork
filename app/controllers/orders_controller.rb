@@ -136,7 +136,7 @@ class OrdersController < ApplicationController
       content = Content.new(type: 'text/plain', value: 'Job Type: ' + @order.job_type)
       mail = SendGrid::Mail.new(from, subject, to, content)
       puts "EMAIL HERE"
-      sg = SendGrid::API.new(api_key: "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")
+      sg = SendGrid::API.new(api_key: ENV['SENDGRID_API'])
       response = sg.client.mail._('send').post(request_body: mail.to_json)
       puts response.body
       
@@ -214,7 +214,7 @@ class OrdersController < ApplicationController
         subject = @order.get_user_name + ' has ended a job!'
         content = Content.new(type: 'text/plain', value: 'Job Type: ' + @order.job_type)
         mail = SendGrid::Mail.new(from, subject, to, content)
-        sg = SendGrid::API.new(api_key: "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")
+        sg = SendGrid::API.new(api_key: ENV['SENDGRID_API'])
         response = sg.client.mail._('send').post(request_body: mail.to_json)
         puts response.body
         
