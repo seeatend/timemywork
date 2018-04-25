@@ -131,7 +131,7 @@ class OrdersController < ApplicationController
       
 
       from = Email.new(email: 'admin@ysl.com')
-      to = Email.new(email: 'yslysl8888@gmail.com')
+      to = Email.new(email: 'mms.monsoon888@gmail.com')
       subject = @order.get_user_name + ' has start a job!'
       content = Content.new(type: 'text/plain', value: 'Job Type: ' + @order.job_type)
       mail = SendGrid::Mail.new(from, subject, to, content)
@@ -210,7 +210,7 @@ class OrdersController < ApplicationController
         http.request(request)
  
         from = Email.new(email: 'admin@ysl.com')
-        to = Email.new(email: 'yslysl8888@gmail.com')
+        to = Email.new(email: 'mms.monsoon888@gmail.com')
         subject = @order.get_user_name + ' has ended a job!'
         content = Content.new(type: 'text/plain', value: 'Job Type: ' + @order.job_type)
         mail = SendGrid::Mail.new(from, subject, to, content)
