@@ -11,7 +11,7 @@ class MembersController < ApplicationController
   # GET /members/1
   def show
     @page_title = 'Show'
-    @orders = @member.orders.order(id: :desc)
+    @orders = @member.orders.order(starttime: :desc)
   end
 
   # GET /members/new
