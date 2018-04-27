@@ -1293,9 +1293,12 @@ var Dashboard = function() {
         }
 
         var picker = $('#m_dashboard_daterangepicker');
-        console.log($(picker).attr("data-startDate"));
+        //console.log($(picker).attr("data-startDate"));
         var startDateStr = $(picker).attr("data-start-date");
         var endDateStr = $(picker).attr("data-end-date");
+
+        console.log(startDateStr);
+        console.log(endDateStr);
         var start = startDateStr ? new moment(startDateStr) : moment();
         var end = endDateStr ? new moment(endDateStr) : moment();
         var label = '';
@@ -1315,7 +1318,8 @@ var Dashboard = function() {
         picker.find('.m-subheader__daterange-title').html(title);
 
         function cb(start, end, label) {
-            location.href = '/?start=' + start._d + '&end=' + end._d;
+            //console.log(start);
+            location.href = '/?start=' + start.toString() + '&end=' + end.toString();
 
         }
 

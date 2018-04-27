@@ -5,7 +5,7 @@ class WelcomeController < ApplicationController
   
   def dashboard
     @page_title = 'Dashboard'
-    @start_date = params[:start].to_time if params[:start]
+    @start_date = Time.at params[:start].to_time if params[:start]
     @end_date = params[:end].to_time if params[:end]
     @account = Account.first
     @orders = Order.all.where("endtime >= ? AND endtime <= ?", @start_date, @end_date)
