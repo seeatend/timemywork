@@ -146,9 +146,9 @@ class OrdersController < ApplicationController
       content = Content.new(type: 'text/plain', value: 'Job Type: ' + @order.job_type)
       mail = SendGrid::Mail.new(from, subject, to, content)
       puts "EMAIL HERE"
-      sg = SendGrid::API.new(api_key: ENV['SENDGRID_API'])
-      response = sg.client.mail._('send').post(request_body: mail.to_json)
-      puts response.body
+      #sg = SendGrid::API.new(api_key: ENV['SENDGRID_API'])
+      #response = sg.client.mail._('send').post(request_body: mail.to_json)
+      #puts response.body
       
       respond_to do |format|
 
@@ -186,7 +186,6 @@ class OrdersController < ApplicationController
     if @order.update(order_params)
       
       if params[:order][:amount].present?
-        puts "EXIST"
         if @order.status == "Credit"
           if @order.credit
             @order.credit.update(amount: @order.amount, name: @order.creditor_name)
@@ -199,11 +198,16 @@ class OrdersController < ApplicationController
         costs = Account.first.costs - @cost + @order.cost
         Account.first.update(sales: sales, costs: costs)
         respond_to do |format|
-          format.html {redirect_to admin_edit_path(@order)}# show.html.erb
-          format.json { render json: @order }
+          if params[:redirect] == "back"
+            puts "HELLOO"
+            format.html { redirect_to member_path(@order.member_id) }
+            format.json { render json: @order }
+          else
+            format.html {redirect_to admin_edit_path(@order)}# show.html.erb
+            format.json { render json: @order }
+          end
         end
       else
-        puts "NOT EXIST"
         require 'net/http'
         message = @order.get_user_name + " has ended a job!"
         params = {"app_id" => "e890308e-4333-4497-b7b6-59ae47145896", 
@@ -224,9 +228,9 @@ class OrdersController < ApplicationController
         subject = @order.get_user_name + ' has ended a job!'
         content = Content.new(type: 'text/plain', value: 'Job Type: ' + @order.job_type)
         mail = SendGrid::Mail.new(from, subject, to, content)
-        sg = SendGrid::API.new(api_key: ENV['SENDGRID_API'])
-        response = sg.client.mail._('send').post(request_body: mail.to_json)
-        puts response.body
+        #sg = SendGrid::API.new(api_key: ENV['SENDGRID_API'])
+        #response = sg.client.mail._('send').post(request_body: mail.to_json)
+        #puts response.body
         
         
         if @order.status == "Credit"
@@ -264,9 +268,13 @@ class OrdersController < ApplicationController
         Account.first.update(costs: Account.first.costs - @order.cost)
       end
       respond_to do |format|
-
-        format.html {redirect_to root_path}# show.html.erb
-        format.json { render json: @order, status: :created, location: @order }
+        if params[:redirect] == "back"
+          format.html { redirect_back(fallback_location: root_path) }# show.html.erb
+          format.json { render json: @order, status: :created, location: @order }
+        else
+          format.html {redirect_to root_path}# show.html.erb
+          format.json { render json: @order, status: :created, location: @order }
+        end
       end
       
     else

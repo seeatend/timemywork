@@ -161,6 +161,9 @@
             </div>
             <div class="m-portlet__foot m-portlet__foot--fit">
               <div class="m-form__actions m-form__actions">
+                <% if params[:redirect] == "back" %>
+                  <%= hidden_field_tag(:redirect, 'back') %>
+                <% end %>
                 <%= form.submit "Update", class: "btn btn-primary" %>
                 <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
 

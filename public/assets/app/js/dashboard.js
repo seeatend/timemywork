@@ -1441,6 +1441,9 @@ var Dashboard = function() {
                     var order_id = row.id
 
                     return '\
+                          <a href="/orders/admin-edit/' + order_id + '" rel="nofollow" class="m-portlet__nav-link btn m-btn m-btn--hover m-btn--icon m-btn--icon-only m-btn--pill">\
+                              <i class="la la-edit"></i>\
+                          </a>\
                         <a href="/orders/' + order_id + '" data-method="delete" rel="nofollow" data-confirm="Are you sure?" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete">\
                             <i class="la la-trash"></i>\
                         </a>\

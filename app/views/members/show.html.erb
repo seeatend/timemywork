@@ -49,6 +49,10 @@
 							<span class="m-card-profile__name">
                 <%= @member.name %>
               </span>
+              <p>X-editable Bootstrap 3 popup</p>
+              <div style="margin: 150px">
+                  <a href="#" id="status" data-value="2"></a>
+              </div>
 							<a href="" class="m-card-profile__email m-link">
 								<%= @member.email %>
 							</a>
@@ -277,7 +281,7 @@
             <div class="m-widget11">
               <div class="table-responsive">
                 <!--begin::Table-->
-                <table class="table">
+                <table class="table" id="table-inline">
                   <!--begin::Thead-->
                   <thead>
                   <tr>
@@ -312,6 +316,8 @@
                     <td>
                       Action
                     </td>
+                    <td>
+                    </td>
 
                   </tr>
                   </thead>
@@ -340,6 +346,7 @@
                           <%= order.status %>
                         </td>
                         <td>
+                          <%= order.creditor_name %>
                         </td>
                         <td>
                           <%= order.amount - order.cost %>
@@ -360,8 +367,17 @@
                           <% end %>
                         </td>
                         <td class="m--align-right m--font-brand">
+                          <div class="fa fa-trash-alt"></div>
 
-
+                        </td>
+                        <td>
+                          <a href="/orders/admin-edit/<%= order.id %>?redirect=back" rel="nofollow" class="m-portlet__nav-link btn m-btn m-btn--hover m-btn--icon m-btn--icon-only m-btn--pill" title="Delete">
+                              <i class="la la-edit"></i>
+                          </a>
+                          
+                          <a href="/orders/<%= order.id %>?redirect=back" data-method="delete" rel="nofollow" data-confirm="Are you sure?" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete">
+                              <i class="la la-trash"></i>
+                          </a>
                         </td>
                       
                         </tr>
@@ -380,6 +396,7 @@
       </div>
     </div>
     <!--end:: Widgets/Application Sales-->
+    
   </div>
 </div>
 </div>

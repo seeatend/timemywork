@@ -56,7 +56,7 @@
                   <label for="example_input_full_name">
                     Member
                   </label>
-                  <%= form.select :member_id, Member.all.map {|x| [x.name, x.id]}, {}, {class: "form-control m-input m-input--air m-input--pill", id: "job_type"} %>
+                  <%= form.select :member_id, Member.all.map {|x| [x.name, x.id]}, {}, {class: "form-control m-input m-input--air m-input--pill", id: "member"} %>
                   <span class="m-form__help">
           														Please assign new member
           													</span>
@@ -70,6 +70,14 @@
           														Please enter user's Job Type
           													</span>
                 </div>
+                <div className="form-group m-form__group" id="fixed-type" style="display: none;">
+                    <label htmlFor="exampleSelect1">
+                        Type
+                    </label>
+                    <%= form.select :fixed_type, [['Normal (普通)', 'Normal'], ['Hotel (酒店)', 'Hotel']], {}, {class: "form-control m-input m-input--air m-input--pill", id: "fixed_type"} %>
+                   
+                </div>
+                
 
                 <div class="form-group m-form__group">
                   <label for="example_input_full_name">
@@ -143,6 +151,12 @@
 <script>
   
   $( document ).ready(function() {
+    
+    $("#job_type").on("change", function() {
+        $("#fixed-type").show();
+  
+      // Call form.submit here if need be
+    });
     $("#payment-type").on("change", function() {
         $("#business").show();
   
