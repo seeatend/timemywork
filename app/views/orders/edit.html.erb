@@ -48,6 +48,7 @@
           </div>
         </div>
 
+
         <%= form_for(@order, html: {class: "m-form"}) do |form| %>
             <div class="m-portlet__body">
 
@@ -78,6 +79,22 @@
             </div>
         <% end %>
         <!--end::Form-->
+        <% unless @order.add_order == true %>
+        <% if @order.job_type == "Time Tracking"%>
+        <div class="m-portlet__body">
+        
+        <div class="form-group m-form__group">
+        <div class="m-form__actions m-form__actions">
+          <div class="m-portlet__foot m-portlet__foot--fit">
+            <%= link_to orders_add_order_path(id: @order.id), method: :post do %>
+            <button class="btn btn-success btn-block">Add Order</button>
+            <% end %>
+          </div>
+        </div>
+        </div>
+      </div>
+        <% end %>
+        <% end %>
       </div>
       <!--end::Portlet-->
 

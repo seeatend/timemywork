@@ -26,6 +26,16 @@ class OrdersController < ApplicationController
       format.json { render json: @orders }
     end
   end
+  
+  #Add Order
+  def add_order
+    @order = Order.find(params[:id])
+    @order.update(add_order: true)
+    
+    respond_to do |format|
+      format.html {redirect_to edit_order_path(@order)}
+    end
+  end
 
   # GET /orders/1
   def show
@@ -123,32 +133,7 @@ class OrdersController < ApplicationController
           
       else
         
-      require 'net/http'
-      message = @order.get_user_name + " has start a job!"
-      params = {"app_id" => "e890308e-4333-4497-b7b6-59ae47145896", 
-                "contents" => {"en" => message},
-                "included_segments" => ["All"]}
-      uri = URI.parse('https://onesignal.com/api/v1/notifications')
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-
-      request = Net::HTTP::Post.new(uri.path,
-                                    'Content-Type'  => 'application/json;charset=utf-8',
-                                    'Authorization' => "Basic MjE4MWRlNWMtODJmMi00NWQ0LTk2OTctNjg3ZmU0N2I5ZTAw")
-      request.body = params.as_json.to_json
-      http.request(request)
       
-      
-
-      from = Email.new(email: 'admin@ysl.com')
-      to = Email.new(email: 'yslysl8888@gmail.com')
-      subject = @order.get_user_name + ' has start a job!'
-      content = Content.new(type: 'text/plain', value: 'Job Type: ' + @order.job_type)
-      mail = SendGrid::Mail.new(from, subject, to, content)
-      puts "EMAIL HERE"
-      sg = SendGrid::API.new(api_key: ENV['SENDGRID_API'])
-      response = sg.client.mail._('send').post(request_body: mail.to_json)
-      puts response.body
       
       respond_to do |format|
 
@@ -173,8 +158,16 @@ class OrdersController < ApplicationController
     end
     
     unless params[:order][:amount].present?
-      if @order.job_type == "Time Tracking"
-        
+      if @order.job_type == "Time Tracking" && @order.add_order
+        actual_time = @order.endtime.to_time - (@order.starttime.to_time + 1.hours)
+        if actual_time < 0
+          actual_time = 0
+        else
+          actual_time = actual_time
+        end
+        @order.amount = @order.amount * actual_time / 1.hours.round(0.1) + @order.member.fixed_rate
+        @order.cost = @order.cost * actual_time / 1.hours.round(0.1) + @order.member.normal_fixed_cost
+      else
         @order.amount = @order.amount * ((@order.endtime.to_time - @order.starttime.to_time) / 1.hours).round(0.1)
         @order.cost = @order.cost * ((@order.endtime.to_time - @order.starttime.to_time) / 1.hours).round(0.1)
       end
@@ -208,29 +201,7 @@ class OrdersController < ApplicationController
           end
         end
       else
-        require 'net/http'
-        message = @order.get_user_name + " has ended a job!"
-        params = {"app_id" => "e890308e-4333-4497-b7b6-59ae47145896", 
-                  "contents" => {"en" => message},
-                  "included_segments" => ["All"]}
-        uri = URI.parse('https://onesignal.com/api/v1/notifications')
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
 
-        request = Net::HTTP::Post.new(uri.path,
-                                      'Content-Type'  => 'application/json;charset=utf-8',
-                                      'Authorization' => "Basic MjE4MWRlNWMtODJmMi00NWQ0LTk2OTctNjg3ZmU0N2I5ZTAw")
-        request.body = params.as_json.to_json
-        http.request(request)
- 
-        from = Email.new(email: 'admin@ysl.com')
-        to = Email.new(email: 'yslysl8888@gmail.com')
-        subject = @order.get_user_name + ' has ended a job!'
-        content = Content.new(type: 'text/plain', value: 'Job Type: ' + @order.job_type)
-        mail = SendGrid::Mail.new(from, subject, to, content)
-        sg = SendGrid::API.new(api_key: ENV['SENDGRID_API'])
-        response = sg.client.mail._('send').post(request_body: mail.to_json)
-        puts response.body
         
         
         if @order.status == "Credit"
@@ -294,7 +265,7 @@ class OrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      params.require(:order).permit(:reference, :status, :job_type, :fixed_type, :creditor_name, :amount, :cost, :member_id, :starttime, :endtime)
+      params.require(:order).permit(:reference, :status, :job_type, :fixed_type, :creditor_name, :amount, :cost, :member_id, :starttime, :endtime, :add_order)
     end
  
     def pending_order

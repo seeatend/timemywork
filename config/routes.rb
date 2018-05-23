@@ -18,6 +18,6 @@ Rails.application.routes.draw do
   get '/notify' => 'welcome#notify', :as => 'notify'
   get '/test' => 'welcome#test', :as => 'test'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  
+  post 'orders/add_order'
 
 end
